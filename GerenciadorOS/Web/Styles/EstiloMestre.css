@@ -11,8 +11,9 @@ body {
 	height:170px;
 	/* background-color:#753232; */
 	background-image:url("../Images/fundoTopo.png");
+	background-repeat:	no-repeat;
 	/* border-top:1px solid #666; */
-	border-bottom:1px dotted #818181;
+	/* border-bottom:1px dotted #818181; */
 	color:#191919;
 	text-align:left;
 }
@@ -57,7 +58,7 @@ body {
 	padding:2px 10px;
 	padding-bottom: 10px;
 	text-align:justify;
-	/* border-top:1px dotted #818181; */
+	border-top:1px dotted #818181;
 	border-left:1px dotted #818181;
 	border-right:1px dotted #818181;
 	border-bottom:1px dotted #818181;
