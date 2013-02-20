@@ -6,10 +6,11 @@ body {
 	Verdana, Arial, Serif;
 	height: 100%;
 }
-#topo{
+#topo{	
 	width:auto;
 	height:170px;
-	background-color:#753232;
+	/* background-color:#753232; */
+	background-image:url("../Images/fundoTopo.png");
 	/* border-top:1px solid #666; */
 	border-bottom:1px dotted #818181;
 	color:#191919;
