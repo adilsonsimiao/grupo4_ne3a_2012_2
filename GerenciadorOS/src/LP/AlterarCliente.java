@@ -29,7 +29,10 @@ public class AlterarCliente extends javax.swing.JFrame {
         setTitle("Alterar Cliente");
     }
   
-   
+     
+            
+            
+            
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -168,6 +171,16 @@ public class AlterarCliente extends javax.swing.JFrame {
             
             }
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
                         
             nomeCli.setText(nome);
             enderecoCli.setText(endereco);
@@ -183,6 +196,7 @@ public class AlterarCliente extends javax.swing.JFrame {
             
                 
     
+          
         
     
     }//GEN-LAST:event_buscarCliActionPerformed
