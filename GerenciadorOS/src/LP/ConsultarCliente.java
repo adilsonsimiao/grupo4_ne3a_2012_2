@@ -9,44 +9,19 @@ package LP;
  *
  * @author adilson
  */
-public class ConsultarCliente extends javax.swing.JFrame {
-   private  String codigo;
-   private  String nome;
-   private  String telefone;
-   private  String endereco;
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
+public class ConsultarCliente extends javax.swing.JDialog{
+   
+      
+      
+      AlterarCliente altCli = new AlterarCliente();
+      
+      
+      
+       
+  
+   
+    
+   
    
     /**
      * Creates new form ConsultarCliente
@@ -56,6 +31,9 @@ public class ConsultarCliente extends javax.swing.JFrame {
         
         setTitle("Consulta Cliente");
     }
+    
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -197,21 +175,25 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_codigoCliActionPerformed
 
     private void nomeCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCliActionPerformed
-         this.nomeCli.setText(this.getNome());
+       
+        
+    
     }//GEN-LAST:event_nomeCliActionPerformed
 
     private void enderecoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoCliActionPerformed
-        this.enderecoCli.setText(this.getEndereco());
+        
     }//GEN-LAST:event_enderecoCliActionPerformed
 
     private void telfoneCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telfoneCliActionPerformed
-         this.telfoneCli.setText(this.getTelefone());
+         
     }//GEN-LAST:event_telfoneCliActionPerformed
 
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
        
     }//GEN-LAST:event_jButton1MouseExited
 
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -246,6 +228,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
             }
         });
     }
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codigoCli;
     private javax.swing.JFormattedTextField enderecoCli;
