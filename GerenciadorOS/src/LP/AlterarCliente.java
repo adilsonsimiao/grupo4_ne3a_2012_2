@@ -24,10 +24,7 @@ public class AlterarCliente extends javax.swing.JFrame {
         initComponents();
         setTitle("Alterar Cliente");
     }
-   private  String codigo;
-   private  String nome;
-   private  String telefone;
-   private  String endereco;
+  
    
     
     /**
