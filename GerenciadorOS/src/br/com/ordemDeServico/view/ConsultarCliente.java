@@ -2,20 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package LP;
+package br.com.ordemDeServico.view;
+
+import br.com.OrdemDeServico.model.Dao.ClienteDao;
+import br.com.OrdemDeServico.model.entity.Cliente;
+
+
 
 
 /**
  *
  * @author adilson
  */
-public class ConsultarCliente extends javax.swing.JDialog{
-   
-      
-      
-      AlterarCliente altCli = new AlterarCliente();
-      
-      
+public class ConsultarCliente extends javax.swing.JFrame{
+   private ClienteDao clienteDao;  
+   private int cpf;
+   private Cliente cliente;    
       
        
   
@@ -46,24 +48,24 @@ public class ConsultarCliente extends javax.swing.JDialog{
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        codigoCli = new javax.swing.JTextField();
+        cpfCli = new javax.swing.JTextField();
         nomeCli = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        enderecoCli = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
-        telfoneCli = new javax.swing.JFormattedTextField();
+        alterarCli = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jBConsultarCPF = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jBConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Codigo");
+        jLabel1.setText("CPF");
 
         jLabel2.setText("Nome");
 
-        codigoCli.addActionListener(new java.awt.event.ActionListener() {
+        cpfCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codigoCliActionPerformed(evt);
+                cpfCliActionPerformed(evt);
             }
         });
 
@@ -73,69 +75,72 @@ public class ConsultarCliente extends javax.swing.JDialog{
             }
         });
 
-        jButton1.setText("Alterar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        alterarCli.setText("Alterar");
+        alterarCli.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                alterarCliMouseExited(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        alterarCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Endereço");
-
-        enderecoCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enderecoCliActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Telefone");
-
-        telfoneCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telfoneCliActionPerformed(evt);
+                alterarCliActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Consulta");
 
+        jBConsultarCPF.setText("Consultar");
+        jBConsultarCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConsultarCPFActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jBConsultar.setText("Consultar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(alterarCli))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(enderecoCli, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                                    .addComponent(telfoneCli)))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cpfCli, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomeCli, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(codigoCli, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                                    .addComponent(jBConsultarCPF)
+                                    .addComponent(jBConsultar)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel5)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,34 +150,32 @@ public class ConsultarCliente extends javax.swing.JDialog{
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(codigoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(cpfCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBConsultarCPF))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBConsultar))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(enderecoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(telfoneCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(42, 42, 42))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(alterarCli)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void codigoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoCliActionPerformed
+    private void alterarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarCliActionPerformed
+        this.cpf = jTable1.getSelectedRow();
         
-    }//GEN-LAST:event_codigoCliActionPerformed
+        
+    }//GEN-LAST:event_alterarCliActionPerformed
+
+    private void cpfCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfCliActionPerformed
+        
+    }//GEN-LAST:event_cpfCliActionPerformed
 
     private void nomeCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeCliActionPerformed
        
@@ -180,20 +183,22 @@ public class ConsultarCliente extends javax.swing.JDialog{
     
     }//GEN-LAST:event_nomeCliActionPerformed
 
-    private void enderecoCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoCliActionPerformed
-        
-    }//GEN-LAST:event_enderecoCliActionPerformed
-
-    private void telfoneCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telfoneCliActionPerformed
-         
-    }//GEN-LAST:event_telfoneCliActionPerformed
-
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+    private void alterarCliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alterarCliMouseExited
        
-    }//GEN-LAST:event_jButton1MouseExited
+    }//GEN-LAST:event_alterarCliMouseExited
 
-    
-    
+    private void jBConsultarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarCPFActionPerformed
+        this.clienteDao.consultarPorCPF(jBConsultarCPF.getText());
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jBConsultarCPFActionPerformed
+
+  
+        
+        
     /**
      * @param args the command line arguments
      */
@@ -230,15 +235,15 @@ public class ConsultarCliente extends javax.swing.JDialog{
     }
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField codigoCli;
-    private javax.swing.JFormattedTextField enderecoCli;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton alterarCli;
+    private javax.swing.JTextField cpfCli;
+    private javax.swing.JButton jBConsultar;
+    private javax.swing.JButton jBConsultarCPF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField nomeCli;
-    private javax.swing.JFormattedTextField telfoneCli;
     // End of variables declaration//GEN-END:variables
 }
