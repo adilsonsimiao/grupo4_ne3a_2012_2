@@ -3,8 +3,8 @@
  * and open the template in the editor.
  */
 package br.com.ordemDeServico.view;
-import br.com.OrdemDeServico.model.entity.Cliente;
-import br.com.OrdemDeServico.model.entity.Endereco;
+import br.com.ordemDeServico.model.entity.Cliente;
+import br.com.ordemDeServico.model.entity.Endereco;
 
 
 

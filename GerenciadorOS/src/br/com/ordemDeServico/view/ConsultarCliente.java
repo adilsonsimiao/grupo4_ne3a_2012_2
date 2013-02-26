@@ -4,8 +4,8 @@
  */
 package br.com.ordemDeServico.view;
 
-import br.com.OrdemDeServico.model.Dao.ClienteDao;
-import br.com.OrdemDeServico.model.entity.Cliente;
+import br.com.ordemDeServico.model.dao.ClienteDao;
+import br.com.ordemDeServico.model.entity.Cliente;
 
 
 

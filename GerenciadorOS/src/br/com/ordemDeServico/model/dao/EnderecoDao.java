@@ -2,8 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.OrdemDeServico.model.Dao;
-import br.com.OrdemDeServico.model.entity.Endereco;
+package br.com.ordemDeServico.model.dao;
+import br.com.ordemDeServico.model.entity.Endereco;
 import br.com.ordemDeServico.connection.Conexao;
 import br.com.ordemDeServico.connection.CreateDaoException;
 import java.sql.Connection;
