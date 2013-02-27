@@ -4,7 +4,7 @@
  */
 package br.com.ordemDeServico.view;
 
-import br.com.ordemDeServico.model.dao.ClienteDao;
+import br.com.ordemDeServico.model.dao.FrameworkDao;
 import br.com.ordemDeServico.model.entity.Cliente;
 
 
@@ -15,7 +15,7 @@ import br.com.ordemDeServico.model.entity.Cliente;
  * @author adilson
  */
 public class ConsultarCliente extends javax.swing.JFrame{
-   private ClienteDao clienteDao;  
+   private FrameworkDao clienteDao;  
    private int cpf;
    private Cliente cliente;    
       
@@ -188,7 +188,7 @@ public class ConsultarCliente extends javax.swing.JFrame{
     }//GEN-LAST:event_alterarCliMouseExited
 
     private void jBConsultarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarCPFActionPerformed
-        this.clienteDao.consultarPorCPF(jBConsultarCPF.getText());
+        
         
         
         

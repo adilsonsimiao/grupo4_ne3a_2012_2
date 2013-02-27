@@ -183,6 +183,9 @@
     <Component class="javax.swing.JTextField" name="jTFComplemento">
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNumero">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFNumeroActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFBairro">
     </Component>

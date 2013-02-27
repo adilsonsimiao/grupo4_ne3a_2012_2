@@ -3,6 +3,10 @@
  * and open the template in the editor.
  */
 package br.com.ordemDeServico.view;
+
+
+import br.com.ordemDeServico.model.dao.ClienteDao;
+import br.com.ordemDeServico.model.dao.EnderecoDao;
 import br.com.ordemDeServico.model.entity.Cliente;
 import br.com.ordemDeServico.model.entity.Endereco;
 
@@ -15,7 +19,8 @@ import br.com.ordemDeServico.model.entity.Endereco;
  */
 public class CadastrarCliente extends javax.swing.JFrame {
     private Cliente cliente;
-   
+    ClienteDao daoCliente;
+     EnderecoDao daoEndereco;
     
     public CadastrarCliente() {
         initComponents();
@@ -78,6 +83,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel5.setText("CPF: ");
 
         jLabel6.setText("Logradouro");
+
+        jTFNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNumeroActionPerformed(evt);
+            }
+        });
 
         jTFUf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +206,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
                                 jTFBairro.getText(), 
                                 jTFCidade.getText(), 
                                 jTFUf.getText(), 
-                              jTFCEP.getText()));        
+                              jTFCEP.getText())); 
+        
+       daoCliente.insert(cliente);
+       
        
        
     }//GEN-LAST:event_cadastrarCliActionPerformed
@@ -207,6 +221,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void jTFUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFUfActionPerformed
+
+    private void jTFNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNumeroActionPerformed
 
  
     
