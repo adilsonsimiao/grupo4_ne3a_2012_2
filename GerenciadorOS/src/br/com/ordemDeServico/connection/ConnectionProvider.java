@@ -13,7 +13,7 @@ public class ConnectionProvider {
     public static Connection getConection(){
         if(currentConnection == null){
             try {
-                currentConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/aluno", "root", "root");
+                currentConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ordemDeServico", "root", "");
                 currentConnection.setAutoCommit(false);
             } catch (SQLException ex) {
                 Logger.getLogger(ConnectionProvider.class.getName()).log(Level.SEVERE, null, ex);

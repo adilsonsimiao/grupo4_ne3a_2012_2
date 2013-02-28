@@ -11,7 +11,7 @@ import br.com.ordemDeServico.model.entity.Cliente;
  *
  * @author adilson
  */
-public class FrameworkDao extends ClienteDao<Cliente>{
+public class FrameworkDao {
 
   
 

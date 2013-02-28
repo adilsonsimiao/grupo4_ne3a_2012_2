@@ -25,43 +25,7 @@ public class Contato {
         this.telefone = telefone;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 61 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 61 * hash + (int) (this.celular ^ (this.celular >>> 32));
-        hash = 61 * hash + Objects.hashCode(this.email);
-        hash = 61 * hash + (int) (this.telefone ^ (this.telefone >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Contato other = (Contato) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.celular != other.celular) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (this.telefone != other.telefone) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
-    
+   
     
     
     private long telefone;

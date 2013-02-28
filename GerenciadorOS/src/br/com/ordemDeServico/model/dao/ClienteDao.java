@@ -18,8 +18,9 @@ import java.util.logging.Logger;
  *
  * @author adilson
  */
-public abstract class ClienteDao implements Dao<Cliente> {
-    private static String INSERT_SQL = "INSERT INTO Cliente (nome) VALUES(?)";
+public class ClienteDao implements Dao<Cliente> {
+    private static String INSERT_SQL_CLIENTE = "INSERT INTO cliente (nome, cpf, rg, telefone, endereco_id) VALUES(?, ?, ?, ?, ?)";
+    private static String INSERT_SQL_ENDERECO = "INSERT INTO endereco (logradouro, complemento, numero, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static String UPDATE_SQL = "UPDATE Cliente SET nome= ? WHERE id = ?";
     private static String DELETE_SQL = "DELETE FROM Cliente WHERE id = ?";
     private static String RETRIEVE_SQL = "SELECT id, nome FROM Cliente WHERE id = ?";
@@ -30,12 +31,24 @@ public abstract class ClienteDao implements Dao<Cliente> {
         Connection con = ConnectionProvider.getConection();
 
         try {
-            PreparedStatement ps = con.prepareStatement(INSERT_SQL);
-            ps.setString(1, cliente.getNome());
-            ps.setString(2, cliente.getCpf());
-            ps.setString(3, cliente.getRg());
-            ps.setString(4, cliente.getTelefone());
+            PreparedStatement ps = null;    
+            ps = con.prepareStatement(INSERT_SQL_ENDERECO);
+            ps.setString(1, cliente.getEndereco().getLogradouro());
+            ps.setString(2, cliente.getEndereco().getComplemento());
+            ps.setInt(3, cliente.getEndereco().getNumero());
+            ps.setString(4, cliente.getEndereco().getBairro());
+            ps.setString(5, cliente.getEndereco().getCidade());
+            ps.setString(6, cliente.getEndereco().getUf());
+            ps.setString(7, cliente.getEndereco().getCep());
             ps.execute();
+            
+//            ps = con.prepareStatement(INSERT_SQL_CLIENTE);
+//            ps.setString(1, cliente.getNome());
+//            ps.setString(2, cliente.getCpf());
+//            ps.setString(3, cliente.getRg());
+//            ps.setString(4, cliente.getTelefone());
+//            ps.setInt(5, cliente.getEndereco().getId());
+//            ps.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao preparar a instrução de INSERT do Cliente", ex);
@@ -156,7 +169,7 @@ public abstract class ClienteDao implements Dao<Cliente> {
 
              rs.next();
 
-             System.out.println("=====" + rs.getString(1));
+//             System.out.println("=====" + rs.getString(1));
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao preparar a instrução de INSERT do Cliente", ex);
