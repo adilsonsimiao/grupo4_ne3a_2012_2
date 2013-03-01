@@ -4,7 +4,7 @@
  */
 package br.com.ordemDeServico.model.entity;
 
-import java.util.Objects;
+
 
 /**
  *
@@ -15,25 +15,21 @@ public class Cliente {
     private int id;
     private String cpf;
     private String nome;
-    private Endereco endereco;    
-    private Contato contato;
     private String telefone;
+   
+   
+    
 
-    public Cliente(int id, String cpf, String nome, String telefone) {
-        this.id = id;
+    public Cliente(String cpf, String nome, String telefone) {
         this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
+        
     }
-    
-     public Cliente() {
-     }
 
-    public Cliente(String nome, String cpf, String rg) {
-        this.telefone=rg;
-        this.nome = nome;
-        this.cpf = cpf;
-    }
+     public Cliente() {
+         
+     }
     
     public String getTelefone() {
         return telefone;
@@ -57,31 +53,9 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public Contato getContato() {
-        return contato;
-    }
-
-    public void setContato(Contato contato) {
-        this.contato = contato;
-    }
+    }     
     
-    public String getRg() {
-        return telefone;
-    }
-
-    public void setRg(String rg) {
-        this.telefone = rg;
-    }
+    
 
     public int getId() {
         return id;
@@ -95,16 +69,12 @@ public class Cliente {
     @Override
     public String toString() {
         StringBuilder build = new StringBuilder();
-        build.append("Cliente [rg")
-        .append(telefone)
+        build.append("Cliente [cpf")
+        .append(cpf)
         .append(", nome")
         .append(nome)
-        .append(", cpf")
-        .append(cpf)
-        .append(", endereco")
-        .append(endereco)
-        .append(", contato")
-        .append(contato)
+        .append(", telefone")
+        .append(telefone)
         .append("]");
         return build.toString();
     }    

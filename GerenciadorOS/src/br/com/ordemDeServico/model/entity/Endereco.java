@@ -4,7 +4,7 @@
  */
 package br.com.ordemDeServico.model.entity;
 
-import java.util.Objects;
+
 /**
  *
  * @author adilson
@@ -18,13 +18,15 @@ public class Endereco {
     private String bairro;
     private String cidade; 
     private String uf;
-    private String cep;  
+    private String cep; 
+    private int cliente_id;
     
+    private Cliente cliente;
 
     public Endereco() {
     }
 
-    public Endereco(String logradouro, String complemento, int numero, String bairro, String cidade, String uf, String cep, int id) {
+    public Endereco(String logradouro, String complemento, int numero, String bairro, String cidade, String uf, String cep, int cliente_id, Cliente cliente) {
         this.logradouro = logradouro;
         this.complemento = complemento;
         this.numero = numero;
@@ -32,8 +34,23 @@ public class Endereco {
         this.cidade = cidade;
         this.uf = uf;
         this.cep = cep;
-        this.id = id;
+        this.cliente_id = cliente_id;
+        this.cliente = cliente;
     }
+
+    public Endereco(String logradouro, String complemento, int numero, String bairro, String cidade, String uf, String cep, Cliente cliente) {
+        this.logradouro = logradouro;
+        this.complemento = complemento;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+        this.cliente = cliente;
+    }
+
+    
+   
 
    
     public String getLogradouro() {
@@ -124,5 +141,21 @@ public class Endereco {
         
         return build.toString();
                 }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public int getCliente_id() {
+        return cliente_id;
+    }
+
+    public void setCliente_id(int cliente_id) {
+        this.cliente_id = cliente_id;
+    }
     
 }

@@ -26,29 +26,27 @@ public class ClienteDao implements Dao<Cliente> {
     private static String RETRIEVE_SQL = "SELECT id, nome FROM Cliente WHERE id = ?";
     private static String LIST_SQL = "SELECT id, nome FROM Cliente";
     
-    
     public void insert(Cliente cliente) {
         Connection con = ConnectionProvider.getConection();
-
-        try {
-            PreparedStatement ps = null;    
-            ps = con.prepareStatement(INSERT_SQL_ENDERECO);
-            ps.setString(1, cliente.getEndereco().getLogradouro());
-            ps.setString(2, cliente.getEndereco().getComplemento());
-            ps.setInt(3, cliente.getEndereco().getNumero());
-            ps.setString(4, cliente.getEndereco().getBairro());
-            ps.setString(5, cliente.getEndereco().getCidade());
-            ps.setString(6, cliente.getEndereco().getUf());
-            ps.setString(7, cliente.getEndereco().getCep());
-            ps.execute();
             
-//            ps = con.prepareStatement(INSERT_SQL_CLIENTE);
-//            ps.setString(1, cliente.getNome());
-//            ps.setString(2, cliente.getCpf());
-//            ps.setString(3, cliente.getRg());
-//            ps.setString(4, cliente.getTelefone());
-//            ps.setInt(5, cliente.getEndereco().getId());
-//            ps.execute();
+        try {
+            
+               PreparedStatement ps = null; 
+               ResultSet rs= null;    
+            
+            ps = con.prepareStatement(INSERT_SQL_CLIENTE,PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, cliente.getNome());
+            ps.setString(2, cliente.getCpf());
+            ps.setString(3, cliente.getTelefone());
+             rs = ps.getGeneratedKeys();
+            if(rs.next()) 
+            {            
+              cliente.setId(rs.getInt(1));
+            }
+            ps.execute();
+         
+        
+           
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao preparar a instrução de INSERT do Cliente", ex);
@@ -76,8 +74,7 @@ public class ClienteDao implements Dao<Cliente> {
             PreparedStatement ps = con.prepareStatement(UPDATE_SQL);
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
-            ps.setString(3, cliente.getRg());
-            ps.setString(4, cliente.getTelefone());
+            ps.setString(3, cliente.getTelefone());
             ps.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,8 +102,8 @@ public class ClienteDao implements Dao<Cliente> {
             PreparedStatement ps = con.prepareStatement(DELETE_SQL);
             ps.setString(1, object.getNome());
             ps.setString(2, object.getCpf());
-            ps.setString(3, object.getRg());
-            ps.setString(4, object.getTelefone());
+           
+            ps.setString(3, object.getTelefone());
             ps.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
