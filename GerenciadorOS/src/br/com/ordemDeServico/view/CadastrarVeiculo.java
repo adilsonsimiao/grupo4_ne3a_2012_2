@@ -6,6 +6,7 @@ package br.com.ordemDeServico.view;
 
 import br.com.ordemDeServico.model.entity.Veiculo;
 import br.com.ordemDeServico.model.entity.Cliente;
+import br.com.ordemDeServico.model.dao.VeiculoDao;
 import javax.swing.JOptionPane;
 
 /**
@@ -213,6 +214,7 @@ public class CadastrarVeiculo extends javax.swing.JFrame {
     private void cadastrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarVeiculoActionPerformed
         // TODO add your handling code here:
         this.veiculo = new Veiculo();
+        VeiculoDao veiculoDao = new VeiculoDao();
         
         this.veiculo.setId(Long.parseLong(campoVeiculoID.getText()));
         this.veiculo.setProprietarioID(Long.parseLong(campoProprietarioID.getText()));
@@ -221,6 +223,7 @@ public class CadastrarVeiculo extends javax.swing.JFrame {
         this.veiculo.setAno(Integer.parseInt(campoAno.getText()));
         this.veiculo.setPlaca(campoPlaca.getText());
         
+        veiculoDao.cadastrar(this.veiculo);
         JOptionPane.showMessageDialog(null, "Veiculo cadastrado.");
         limparCampos();
     }//GEN-LAST:event_cadastrarVeiculoActionPerformed
