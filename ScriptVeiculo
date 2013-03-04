@@ -1,0 +1,27 @@
+show databases;
+
+create database if not exists ordemDeServico;
+
+
+
+use ordemDeServico;
+
+drop table veiculo;
+
+create table cliente(
+	id mediumint primary key not null auto_increment,
+	nome varchar (100) not null
+);
+
+
+create table veiculo(
+	id mediumint primary key not null auto_increment,
+	proprietarioID mediumint not null,
+	marca varchar(100) not null,
+	modelo varchar(100) not null,
+	ano int(4),
+	placa varchar(7),
+	foreign key (proprietarioID) references cliente(id) on delete cascade
+);
+
+describe veiculo;
