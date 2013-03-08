@@ -146,7 +146,8 @@ public class ClienteDao  {
                cliente.setCpf(rs.getString("cpf"));
                cliente.setRg(rs.getString("rg"));
                cliente.setTelefone(rs.getString("telefone"));
-          
+           
+           
                                
            } 
            
@@ -157,6 +158,9 @@ public class ClienteDao  {
 
         try {
             con.commit();
+             
+           
+           
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             try {
@@ -167,10 +171,9 @@ public class ClienteDao  {
                 Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex1);
                 throw new RuntimeException("Erro ao tentar commitar o Cliente. Não foi possível cancelar a operação.", ex1);
             }
-            
         }
          return cliente;
-       
+     
     }
 
     public Cliente selectCpf(String cpf) {
