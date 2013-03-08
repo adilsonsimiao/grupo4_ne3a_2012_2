@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,14 +19,14 @@ import java.util.logging.Logger;
  *
  * @author adilson
  */
-public class ClienteDao implements Dao<Cliente> {
-    private static String INSERT_SQL_CLIENTE = "INSERT INTO cliente (nome, cpf, rg, telefone, endereco_id) VALUES(?, ?, ?, ?, ?)";
-    private static String INSERT_SQL_ENDERECO = "INSERT INTO endereco (logradouro, complemento, numero, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?, ?, ?)";
+public class ClienteDao  {
+    private static String INSERT_SQL_CLIENTE = "INSERT INTO cliente (nome, cpf, rg, telefone) VALUES(?, ?, ?, ?)";
     private static String UPDATE_SQL = "UPDATE Cliente SET nome= ? WHERE id = ?";
-    private static String DELETE_SQL = "DELETE FROM Cliente WHERE id = ?";
-    private static String RETRIEVE_SQL = "SELECT id, nome FROM Cliente WHERE id = ?";
-    private static String LIST_SQL = "SELECT id, nome FROM Cliente";
-    
+    private static String DELETE_SQL = "DELETE FROM cliente WHERE cpf = ?";
+    private static String SELECT_CPF = "SELECT id, nome, cpf, rg, telefone FROM cliente WHERE cpf =  ? ";
+    private static String SELECT_NOME ="SELECT id, nome, cpf, rg, telefone  FROM cliente WHERE nome= ?";
+  
+    Cliente cliente = new Cliente();
     public void insert(Cliente cliente) {
         Connection con = ConnectionProvider.getConection();
             
@@ -38,6 +39,7 @@ public class ClienteDao implements Dao<Cliente> {
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getTelefone());
+            ps.setString(4, cliente.getRg());
              rs = ps.getGeneratedKeys();
             if(rs.next()) 
             {            
@@ -95,16 +97,14 @@ public class ClienteDao implements Dao<Cliente> {
             }
         }
     }
-    public void delete(Cliente object) {
+    public void delete(String cpf) {
            Connection con = ConnectionProvider.getConection();
 
         try {
             PreparedStatement ps = con.prepareStatement(DELETE_SQL);
-            ps.setString(1, object.getNome());
-            ps.setString(2, object.getCpf());
-           
-            ps.setString(3, object.getTelefone());
+            ps.setString(1, cpf);           
             ps.execute();
+            
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao preparar a instrução de INSERT do Cliente", ex);
@@ -126,14 +126,30 @@ public class ClienteDao implements Dao<Cliente> {
     }
 
    
-    public Cliente retrieve(int id){
-           Connection con = ConnectionProvider.getConection();
-
+    public Cliente selectNome(String nome){
+   
+       
+        
+        Connection con = ConnectionProvider.getConection();
+           PreparedStatement ps = null; 
+           ResultSet rs;
         try {
-            PreparedStatement ps = con.prepareStatement(DELETE_SQL);
-            ps.setInt(1, id);
-            
-            ps.execute();
+            ps = con.prepareStatement(SELECT_NOME);
+           ps.setString(1, nome);
+           rs = ps.executeQuery();
+      
+           
+           while(rs.next()){
+               
+               cliente.setId(rs.getInt("id"));
+               cliente.setNome(rs.getString("nome"));
+               cliente.setCpf(rs.getString("cpf"));
+               cliente.setRg(rs.getString("rg"));
+               cliente.setTelefone(rs.getString("telefone"));
+          
+                               
+           } 
+           
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao preparar a instrução de INSERT do Cliente", ex);
@@ -151,22 +167,38 @@ public class ClienteDao implements Dao<Cliente> {
                 Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex1);
                 throw new RuntimeException("Erro ao tentar commitar o Cliente. Não foi possível cancelar a operação.", ex1);
             }
+            
         }
-        
-        return null;
+         return cliente;
+       
     }
 
-    public List<Cliente> list() {
-         
-           Connection con = ConnectionProvider.getConection();
+    public Cliente selectCpf(String cpf) {
+        
+           
+             ResultSet rs = null;
+             PreparedStatement ps;
+             
+             Connection con = ConnectionProvider.getConection();
+      
+             try {    
+          
+           ps = con.prepareStatement(SELECT_CPF);
+           ps.setString(1, cpf);
+           rs = ps.executeQuery();
+           while(rs.next()){
+               cliente.setId(rs.getInt("id"));
+               cliente.setNome(rs.getString("nome"));
+               cliente.setCpf(rs.getString("cpf"));
+               cliente.setRg(rs.getString("rg"));
+               cliente.setTelefone(rs.getString("telefone"));
+          
+              
+             
 
-        try {
-            PreparedStatement ps = con.prepareStatement(LIST_SQL);
-             ResultSet rs =  ps.executeQuery();
+          
 
-             rs.next();
-
-//             System.out.println("=====" + rs.getString(1));
+           }      
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Erro ao preparar a instrução de INSERT do Cliente", ex);
@@ -186,9 +218,31 @@ public class ClienteDao implements Dao<Cliente> {
             }
         }
 
-        return null;
+      return cliente;
     
     }
       
 
 }
+
+/**
+ *
+ * @author adilson
+ */
+   class clientedaoTest extends ClienteDao{
+       public static void main(String[] args) {
+        ClienteDao clienteDao = new ClienteDao();
+             
+       Cliente cliente = clienteDao.selectNome("adilson");
+      
+        System.out.println(cliente);
+    
+       
+      
+      //clienteDao.delete("023");
+           System.out.println(cliente);     
+     
+       
+       }
+
+} 
