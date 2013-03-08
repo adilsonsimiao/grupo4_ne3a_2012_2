@@ -16,14 +16,18 @@ public class Cliente {
     private String cpf;
     private String nome;
     private String telefone;
-   
+    private String rg;
+
+    
    
     
 
-    public Cliente(String cpf, String nome, String telefone) {
+    public Cliente(String cpf, String nome, String telefone, String rg, int id ) {
         this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
+        this.rg=rg;
+        this.id=id;
         
     }
 
@@ -39,6 +43,13 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
     public String getCpf() {
         return cpf;
     }
@@ -69,10 +80,12 @@ public class Cliente {
     @Override
     public String toString() {
         StringBuilder build = new StringBuilder();
-        build.append("Cliente [cpf")
-        .append(cpf)
+        build.append("Cliente [id")
+        .append(id)
         .append(", nome")
-        .append(nome)
+        .append(nome)        
+        .append(", cpf")
+        .append(cpf)
         .append(", telefone")
         .append(telefone)
         .append("]");
