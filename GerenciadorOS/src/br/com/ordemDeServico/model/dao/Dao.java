@@ -8,15 +8,15 @@ import java.util.List;
 
 /**
  *
- * @author lucio
+ * @author adilson
  */
 public interface Dao<T> {
 
     void insert(T object) throws DaoException;
     void update(T object) throws DaoException;
-    void delete(T object) throws DaoException;
-    T retrieve(int id);
-    List<T> list();
+    void delete(String valor) throws DaoException;
+    T retrieve(String nome);
+    List<T> list(String valor);
 
 }
     
