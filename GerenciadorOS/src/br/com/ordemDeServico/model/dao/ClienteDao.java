@@ -10,8 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,7 +67,7 @@ public class ClienteDao  {
         }
     }
 
-    public void update(Cliente cliente)throws DaoException { 
+    public void update(Cliente cliente) { 
         Connection con = ConnectionProvider.getConection();
 
         try {
