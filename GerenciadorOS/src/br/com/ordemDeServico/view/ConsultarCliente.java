@@ -9,6 +9,8 @@ import br.com.ordemDeServico.model.dao.ClienteDao;
 import br.com.ordemDeServico.model.entity.Cliente;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -89,7 +91,7 @@ public class ConsultarCliente extends javax.swing.JFrame{
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 654, 110));
 
         jLabel1.setText("Nome");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 48, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jLabel2.setText("CPF");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 82, -1, -1));
@@ -143,7 +145,7 @@ public class ConsultarCliente extends javax.swing.JFrame{
 
             tableModel.addRow(new Object[]{id,nome,cpf, rg, telefone});
             
-            
+            System.out.println(tableModel.getValueAt(0, 1));
             jTable1.setModel(tableModel);
           
 
@@ -189,7 +191,20 @@ public class ConsultarCliente extends javax.swing.JFrame{
     }//GEN-LAST:event_jBCpfActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       try {
+           
+           DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+           Cliente cli = new Cliente();
+           AlterarCliente altCli = new AlterarCliente();
+           altCli.setVisible(true);
+           
+             altCli.setName(jTFNome.getText());
+             
+            
+             
+       } catch (Exception ex) {
+           Logger.getLogger(ConsultarCliente.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
   
