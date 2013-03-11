@@ -22,12 +22,14 @@ public class Cliente {
    
     
 
-    public Cliente(String cpf, String nome, String telefone, String rg, int id ) {
-        this.cpf = cpf;
+    public Cliente(int id ,String nome, String cpf, String rg, String telefone  ) {
+        this.id=id; 
         this.nome = nome;
-        this.telefone = telefone;
+        this.cpf = cpf;
         this.rg=rg;
-        this.id=id;
+        this.telefone = telefone;
+        
+       
         
     }
 
@@ -75,20 +77,11 @@ public class Cliente {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
+
     @Override
     public String toString() {
-        StringBuilder build = new StringBuilder();
-        build.append("Cliente [id")
-        .append(id)
-        .append(", nome")
-        .append(nome)        
-        .append(", cpf")
-        .append(cpf)
-        .append(", telefone")
-        .append(telefone)
-        .append("]");
-        return build.toString();
-    }    
+        return "Cliente{" + "id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", telefone=" + telefone + ", rg=" + rg + '}';
+    }
+    
+  
 }
