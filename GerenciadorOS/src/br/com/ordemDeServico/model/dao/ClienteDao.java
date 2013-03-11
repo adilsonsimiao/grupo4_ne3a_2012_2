@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,10 +20,10 @@ import java.util.logging.Logger;
  */
 public class ClienteDao  {
     private static String INSERT_SQL_CLIENTE = "INSERT INTO cliente (nome, cpf, rg, telefone) VALUES(?, ?, ?, ?)";
-    private static String UPDATE_SQL = "UPDATE Cliente SET nome= ? WHERE id = ?";
-    private static String DELETE_SQL = "DELETE FROM cliente WHERE cpf = ?";
+    private static String UPDATE_SQL = "UPDATE cliente SET nome= ?, cpf= ?, rg= ?, telefone= ? WHERE id = ?";
+    private static String DELETE_SQL = "DELETE FROM cliente WHERE  nome = ? ";
     private static String SELECT_CPF = "SELECT id, nome, cpf, rg, telefone FROM cliente WHERE cpf =  ? ";
-    private static String SELECT_NOME ="SELECT id, nome, cpf, rg, telefone  FROM cliente WHERE nome= ?";
+    private static String SELECT_NOME ="SELECT id, nome, cpf, rg, telefone  FROM cliente WHERE nome like ?";
   
     Cliente cliente = new Cliente();
     public void insert(Cliente cliente) {
@@ -68,13 +69,19 @@ public class ClienteDao  {
     }
 
     public void update(Cliente cliente) { 
-        Connection con = ConnectionProvider.getConection();
-
+        
+          ResultSet rs = null;
+          Connection con = ConnectionProvider.getConection();
         try {
+            
             PreparedStatement ps = con.prepareStatement(UPDATE_SQL);
-            ps.setString(1, cliente.getNome());
-            ps.setString(2, cliente.getCpf());
-            ps.setString(3, cliente.getTelefone());
+            ps.setInt(1, cliente.getId());
+            ps.setString(2, cliente.getNome());
+            ps.setString(3, cliente.getCpf());
+            ps.setString(4, cliente.getRg());
+            ps.setString(5, cliente.getTelefone());
+            
+                        
             ps.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,12 +102,12 @@ public class ClienteDao  {
             }
         }
     }
-    public void delete(String cpf) {
+    public void delete(String valor) {
            Connection con = ConnectionProvider.getConection();
 
         try {
             PreparedStatement ps = con.prepareStatement(DELETE_SQL);
-            ps.setString(1, cpf);           
+            ps.setString(1, valor);           
             ps.execute();
             
         } catch (SQLException ex) {
@@ -133,10 +140,12 @@ public class ClienteDao  {
            ResultSet rs;
         try {
             ps = con.prepareStatement(SELECT_NOME);
-           ps.setString(1, nome);
+         
+
+            
+            ps.setString(1, "%"+nome+"%");
            rs = ps.executeQuery();
-      
-           
+                        
            while(rs.next()){
                
                cliente.setId(rs.getInt("id"));
