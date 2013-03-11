@@ -4,55 +4,41 @@
  */
 package br.com.ordemDeServico.view;
 
-
 import br.com.ordemDeServico.model.dao.ClienteDao;
 import br.com.ordemDeServico.model.entity.Cliente;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
-
-
 
 /**
  *
  * @author adilson
  */
-public class ConsultarCliente extends javax.swing.JFrame{
-   
-   Cliente cliente = new Cliente();    
- ClienteDao daoCliente = new ClienteDao() ;   
-       
-  
-   
-    
-   
-   
+public class ConsultarCliente extends javax.swing.JFrame {
+
+    Cliente cliente = new Cliente();
+    ClienteDao daoCliente = new ClienteDao();
+    List<Cliente> clientes = new ArrayList<>();
+    DefaultTableModel tableModel;
+
     /**
      * Creates new form ConsultarCliente
      */
     public ConsultarCliente() {
         initComponents();
-        
-        setTitle("Consulta Cliente");
-        
-           jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-            },
-            new String [] {
-                "Id ", "Nome", "Cpf", "Rg","Telefone"
-            }
-        ));
-        
-       
-    }   
 
-  
-    
+        setTitle("Consulta Cliente");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+            "Id ", "Nome", "Cpf", "Rg", "Telefone"
+        }));
+
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,8 +52,9 @@ public class ConsultarCliente extends javax.swing.JFrame{
         jTFCPF = new javax.swing.JTextField();
         jBNome = new javax.swing.JButton();
         jBCpf = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBAlterar = new javax.swing.JButton();
+        jBFechar = new javax.swing.JButton();
+        jBExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,133 +101,153 @@ public class ConsultarCliente extends javax.swing.JFrame{
         });
         getContentPane().add(jBCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 82, -1, -1));
 
-        jButton1.setText("Alterar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBAlterar.setText("Alterar");
+        jBAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, -1, -1));
+        getContentPane().add(jBAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
 
-        jButton2.setText("Fechar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, -1, -1));
+        jBFechar.setText("Fechar");
+        jBFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFecharActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, -1, -1));
+
+        jBExcluir.setText("Excluir");
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNomeActionPerformed
         try {
+           cliente = daoCliente.selectNome(jTFNome.getText());
+
+            if (cliente.getNome().equals(jTFNome.getText())||true) {
+                 tableModel = (DefaultTableModel) jTable1.getModel();
+                
+
+                tableModel.addRow(new Object[]{cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone()});
+                jTable1.setModel(tableModel);
 
 
-            cliente = daoCliente.selectNome(jTFNome.getText());
-           
-            DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-
-            int id = cliente.getId();
-            String nome = cliente.getNome();
-            String cpf = cliente.getCpf();
-            String rg = cliente.getRg();
-            String telefone = cliente.getTelefone();
+                clientes.add(cliente);
 
 
-            tableModel.addRow(new Object[]{id,nome,cpf, rg, telefone});
-            
-            System.out.println(tableModel.getValueAt(0, 1));
-            jTable1.setModel(tableModel);
-          
+            } else {
 
-            jTFNome.setText(null);
-            jTFCPF.setText(null);
-      
+                JOptionPane.showMessageDialog(null, "Cliente nao existe");
+
+
+            }
+
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "erro");
+            JOptionPane.showMessageDialog(null, "Cliente nao existe");
 
         }
+        jTFNome.setText(null);
+        jTFCPF.setText(null);
 
-         
+
     }//GEN-LAST:event_jBNomeActionPerformed
 
     private void jBCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCpfActionPerformed
-       try {
-           
-        cliente = daoCliente.selectCpf(jTFCPF.getText());
-            List<Cliente> clientes = new ArrayList<>();
-            DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-
-            int id = cliente.getId();
-            String nome = cliente.getNome();
-            String cpf = cliente.getCpf();
-            String rg = cliente.getRg();
-            String telefone = cliente.getTelefone();
+        try {
+            tableModel = (DefaultTableModel) jTable1.getModel();
+            cliente = daoCliente.selectCpf(jTFCPF.getText());
 
 
-            tableModel.addRow(new Object[]{new Integer(id), new String(nome), new String(cpf), new String(rg), new String(telefone)});
+
+            
+
+            tableModel.addRow(new Object[]{cliente.getId(),cliente.getNome(), cliente.getCpf(), cliente.getRg(),cliente.getTelefone()});
             jTable1.setModel(tableModel);
 
 
             jTFNome.setText(null);
             jTFCPF.setText(null);
-            
+
             clientes.add(cliente);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "erro");
+            JOptionPane.showMessageDialog(null, "Cliente não existe");
 
         }
     }//GEN-LAST:event_jBCpfActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       try {
-           
-           DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
-           Cliente cli = new Cliente();
-           AlterarCliente altCli = new AlterarCliente();
-           altCli.setVisible(true);
-           
-             altCli.setName(jTFNome.getText());
-             
-            
-             
-       } catch (Exception ex) {
-           Logger.getLogger(ConsultarCliente.class.getName()).log(Level.SEVERE, null, ex);
-       }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
+        tableModel = (DefaultTableModel) jTable1.getModel();
 
-  
+
+
+        AlterarCliente altCli = new AlterarCliente();
+        altCli.PegarOCliente(cliente);
+        altCli.preencherCampos();
+        altCli.setVisible(true);
+    }//GEN-LAST:event_jBAlterarActionPerformed
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        tableModel = (DefaultTableModel) jTable1.getModel();
+
+      for(int i = 0 ; i < clientes.size(); i++){
+
+        daoCliente.delete(tableModel.getValueAt(i, 1).toString());
         
         
+         
+      }
+      tableModel.setRowCount(0);
+      JOptionPane.showMessageDialog(null, "Cliente removido com sucesso");
+
+
+    }//GEN-LAST:event_jBExcluirActionPerformed
+
+    private void jBFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFecharActionPerformed
+               
+        System.exit(0);
+    }//GEN-LAST:event_jBFecharActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-      
-        
-        
-         
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ConsultarCliente().setVisible(true);
-                
-          
-                
-                
+
+
+
+
             }
         });
     }
-       
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCpf;
+    private javax.swing.JButton jBExcluir;
+    private javax.swing.JButton jBFechar;
     private javax.swing.JButton jBNome;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
