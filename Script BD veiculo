@@ -4,12 +4,12 @@ create database if not exists ordemDeServico;
 
 use ordemDeServico;
 
-drop table veiculo;
-
 create table cliente(
 	id mediumint primary key not null auto_increment,
 	nome varchar (100) not null
 );
+
+drop table veiculo;
 
 create table veiculo(
 	id mediumint primary key not null auto_increment,
@@ -22,6 +22,12 @@ create table veiculo(
 );
 
 describe veiculo;
-select * from veiculo where placa like '%ab%';
 select * from veiculo;	
-SELECT id, proprietarioID, marca, modelo, ano, placa  FROM veiculo WHERE id = 4;
+
+insert into cliente(nome) values ("testadon");
+insert into cliente(nome) values ("testadores");
+
+DELETE FROM veiculo WHERE id = 1;
+
+select * from veiculo where placa like '%AB%';
+select * from cliente;
