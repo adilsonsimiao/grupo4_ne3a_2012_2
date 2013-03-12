@@ -1,4 +1,5 @@
 /*
+ * 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -8,7 +9,7 @@ package br.com.ordemDeServico.model.dao;
  *
  * @author adilson
  */
-class DaoException extends Exception {
+public class DaoException extends Exception {
 
     public DaoException() {
     }
