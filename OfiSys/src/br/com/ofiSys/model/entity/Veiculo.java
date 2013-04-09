@@ -23,29 +23,32 @@ public class Veiculo implements Serializable{
     private String modelo; 
     private int ano;
     private String placa;
+    private int km;
 
     static final String ID = "id";
     static final String MARCA = "marca";
     static final String MODELO = "modelo";
     static final String ANO = "ano";
     static final String PLACA = "placa";
+    static final String KM = "Km";
     
     public Veiculo() {
     }
 
-    public Veiculo(long id, String marca, String modelo, int ano, String placa) {
+    public Veiculo(long id, String marca, String modelo, int ano, String placa, int Km) {
         this.id = id;
         //this.proprietarioID = proprietarioID;
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
-        this.placa = placa;   
+        this.placa = placa;  
+        this.km = km;
     }    
 //------------------------------------------------------------------------------   
    
     @Id  
     @GeneratedValue  
-    @Column(name="PESSOA_ID")
+    @Column(name="id")
     public long getId() {
         return id;
     }
@@ -67,43 +70,52 @@ public class Veiculo implements Serializable{
     */
     
     
-    @Column(name = "Marca")
+    @Column(name = "marca")
     public String getMarca() {
         return marca;
     }
 
-    public void setMarca(String Marca) {
-        this.marca = Marca;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     
-    @Column(name = "Modelo")
+    @Column(name = "modelo")
     public String getModelo() {
         return modelo;
     }
 
-    public void setModelo(String Modelo) {
-        this.modelo = Modelo;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     
-    @Column(name = "Ano")
+    @Column(name = "ano")
     public int getAno() {
         return ano;
     }
 
-    public void setAno(int Ano) {
-        this.ano = Ano;
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 
     
-    @Column(name = "Placa")
+    @Column(name = "placa")
     public String getPlaca() {
         return placa;
     }
 
-    public void setPlaca(String Placa) {
-        this.placa = Placa;
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+    
+    @Column(name = "km")
+    public int getKm() {
+        return km;
+    }
+
+    public void setKm(int km) {
+        this.km = km;
     }
 //------------------------------------------------------------------------------    
 
@@ -116,7 +128,7 @@ public class Veiculo implements Serializable{
         hash = 47 * hash + Objects.hashCode(this.modelo);
         hash = 47 * hash + (int) (this.ano ^ (this.ano >>> 32));
         hash = 47 * hash + Objects.hashCode(this.placa);
-        
+        hash = 47 * hash + (int) (this.km ^(this.km >>> 32));
         return hash;
     }
 
@@ -155,6 +167,10 @@ public class Veiculo implements Serializable{
         if (!Objects.equals(this.placa, other.placa)) {
             return false;
         }
+        
+        if (!Objects.equals(this.km, other.km)){
+            return false;
+        }
        
         return true;
     }
@@ -173,7 +189,9 @@ public class Veiculo implements Serializable{
         .append(", ano: ")
         .append(ano)
         .append(", placa: ")
-        .append(placa)        
+        .append(placa)
+        .append(", Km: ")
+        .append(km)
         .append("]");
         
         return build.toString();
