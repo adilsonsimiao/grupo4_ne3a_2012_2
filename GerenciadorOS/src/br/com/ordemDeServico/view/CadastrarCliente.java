@@ -5,23 +5,40 @@
 package br.com.ordemDeServico.view;
 
 import br.com.ordemDeServico.model.dao.ClienteDao;
+import br.com.ordemDeServico.model.dao.Daos;
 import javax.swing.JOptionPane;
 import br.com.ordemDeServico.model.entity.Cliente;
 import br.com.ordemDeServico.model.entity.Endereco;
 import br.com.ordemDeServico.model.entity.Telefone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+
 /**
  *
  * @author Adilsoon
  */
 public class CadastrarCliente extends javax.swing.JFrame {
-Cliente cliente;
-    ClienteDao cliDao= new ClienteDao();
-Endereco endereco;        
-Telefone telefone;  
+    
+    Cliente cliente;
+    Endereco endereco;
+    Telefone telefone;
+    ClienteDao clienteDao = new ClienteDao();
+    
+    
 
-public CadastrarCliente() {
+    public CadastrarCliente() {
         initComponents();
+        this.cliente = cliente;
+        
+       }
+
+    public void setCliente(Cliente cli) {
+               
+               this.preencheTelaCadastro(cli);
     }
+
+       
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -303,39 +320,70 @@ public CadastrarCliente() {
         getContentPane().add(jBTCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, -1, -1));
 
         jBTFechar.setText("FECHAR");
+        jBTFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBTFecharActionPerformed(evt);
+            }
+        });
         getContentPane().add(jBTFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 520, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jBTCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTCadastrarActionPerformed
         cliente = new Cliente();
-        endereco =  new Endereco();
+        endereco = new Endereco();
         telefone = new Telefone();
-        
-        
+
+
         cliente.setNome(jTFNome.getText());
         cliente.setCpf(jTFCPF.getText());
-        cliente.setRg(jTFRG.getText());        
-        cliDao.persist(cliente);
-       
-        
+        cliente.setRg(jTFRG.getText());
+
+
         endereco.setLogradouro(jTFLogradouro.getText());
         endereco.setComplemento(jTFComplemento.getText());
-        endereco.setNumero(jFormaNumero.getText());
+        endereco.setNumero(jTFNumero.getText());
         endereco.setCidade(jTFCidade.getText());
         endereco.setUf(jCbUF.getName());
         endereco.setCep(jTFormaCep.getText());
-        
-        
-        telefone.setDdd(jFormaComercial.getText());
+        endereco.setBairro(jTFBairro.getText());
+
+
+
+
+        telefone.setDdd(jFormaDD.getText());
         telefone.setTelefone(jFormaNumero.getText());
 
-        jTFNome.setText(null);
-        jTFCPF.setText(null);
-        jTFRG.setText(null);
+
+
+        telefone.setDdd(jFormaDD.getText());
+        telefone.setTelefone(jFormaNumero.getText());
+        cliente.setEndereco(endereco);
+        cliente.setTelefone(telefone);
+
         
+        try {
+            
+            clienteDao.persist(cliente);
+
+
+
+        } catch (Exception ex) {
+            Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         JOptionPane.showMessageDialog(null, "Cliente cadastrado com Sucesso");
+        jTFLogradouro.setText("");
+        jTFComplemento.setText("");
+        jTFNumero.setText("");
+        jTFCidade.setText("");
+        jCbUF.setName("");
+        jTFormaCep.setText("");
+        jTFNome.setText("");
+        jTFCPF.setText("");
+        jTFRG.setText("");
+        jTFBairro.setText("");
+
+
 
     }//GEN-LAST:event_jBTCadastrarActionPerformed
 
@@ -347,39 +395,35 @@ public CadastrarCliente() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormaNumeroActionPerformed
 
-  /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jBTFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBTFecharActionPerformed
+  public static void main(String[] args) {
+        new CadastrarCliente().setVisible(true);
+    }
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastrarCliente().setVisible(true);
-            }
-        });
+  
+  
+   
+    public void preencheTelaCadastro(Cliente cli) {
+           cli.setId(cli.getId());
+            jTFNome.setText(cli.getNome());
+            jTFRG.setText(cli.getRg());
+            jTFCPF.setText(cli.getCpf());
+            
+            jTFLogradouro.setText(cli.getEndereco().getLogradouro());
+            jTFComplemento.setText(cli.getEndereco().getComplemento());
+            jTFNumero.setText(cli.getEndereco().getNumero());
+            jTFBairro.setText(cli.getEndereco().getBairro());
+            jTFCidade.setText(cli.getEndereco().getCidade());
+            jCbUF.setName(cli.getEndereco().getUf());
+            jTFormaCep.setText(cli.getEndereco().getCep());
+//            jFormaDD.setText(cli.getTelefone().get(0).getDdd().toString());
+//            jFormaNumero.setText(cli.getTelefone().get(0).getTelefone().toString());
+////        cliente.setEndereco(endereco);
+//        cliente.setTelefone(telefone);
+//             
+       
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTCadastrar;
