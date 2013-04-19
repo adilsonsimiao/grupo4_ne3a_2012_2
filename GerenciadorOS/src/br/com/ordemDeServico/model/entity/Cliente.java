@@ -4,45 +4,59 @@
  */
 package br.com.ordemDeServico.model.entity;
 
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import br.com.ordemDeServico.model.entity.Endereco;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author adilson
  */
-public class Cliente {  
-      
+@Entity
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String cpf;
+// @Column(nullable = false)
     private String nome;
-    private String telefone;
+// @Column(nullable = false)  
+    private String cpf;
+//  @Column(nullable = false)
     private String rg;
+    @OneToOne(cascade = CascadeType.ALL)
+    Endereco endereco;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCliente")
+    private List<Telefone> telefone = new ArrayList<>();
 
-    
-   
-    
-
-    public Cliente(int id ,String nome, String cpf, String rg, String telefone  ) {
-        this.id=id; 
-        this.nome = nome;
-        this.cpf = cpf;
-        this.rg=rg;
-        this.telefone = telefone;
-        
-       
-        
+    public Cliente() {
     }
 
-     public Cliente() {
-         
-     }
     
-    public String getTelefone() {
+    
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Telefone> getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefone(Telefone telefone) {
+        this.telefone.add(telefone);
     }
 
     public String getRg() {
@@ -52,6 +66,7 @@ public class Cliente {
     public void setRg(String rg) {
         this.rg = rg;
     }
+
     public String getCpf() {
         return cpf;
     }
@@ -66,9 +81,7 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }     
-    
-    
+    }
 
     public int getId() {
         return id;
@@ -82,6 +95,4 @@ public class Cliente {
     public String toString() {
         return "Cliente{" + "id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", telefone=" + telefone + ", rg=" + rg + '}';
     }
-    
-  
 }

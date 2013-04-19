@@ -4,56 +4,38 @@
  */
 package br.com.ordemDeServico.model.entity;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 
 /**
  *
  * @author adilson
  */
-public class Endereco {   
+@Entity
+public class Endereco implements Serializable {   
     
+    @Id
+    @GeneratedValue
     private int id;
+    
     private String logradouro;
     private String complemento;
-    private int numero;
+    private String numero;
     private String bairro;
     private String cidade; 
     private String uf;
     private String cep; 
-    private int cliente_id;
+   
     
-    private Cliente cliente;
+
 
     public Endereco() {
     }
 
-    public Endereco(String logradouro, String complemento, int numero, String bairro, String cidade, String uf, String cep, int cliente_id, Cliente cliente) {
-        this.logradouro = logradouro;
-        this.complemento = complemento;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.uf = uf;
-        this.cep = cep;
-        this.cliente_id = cliente_id;
-        this.cliente = cliente;
-    }
-
-    public Endereco(String logradouro, String complemento, int numero, String bairro, String cidade, String uf, String cep, Cliente cliente) {
-        this.logradouro = logradouro;
-        this.complemento = complemento;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.uf = uf;
-        this.cep = cep;
-        this.cliente = cliente;
-    }
-
-    
-   
-
-   
-    public String getLogradouro() {
+     public String getLogradouro() {
         return logradouro;
     }
 
@@ -69,11 +51,11 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -142,20 +124,13 @@ public class Endereco {
         return build.toString();
                 }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public int getCliente_id() {
-        return cliente_id;
-    }
-
-    public void setCliente_id(int cliente_id) {
-        this.cliente_id = cliente_id;
-    }
+//    public int getCliente_id() {
+//        return cliente_id;
+//    }
+//
+//    public void setCliente_id(int cliente_id) {
+//        this.cliente_id = cliente_id;
+//    }
     
 }

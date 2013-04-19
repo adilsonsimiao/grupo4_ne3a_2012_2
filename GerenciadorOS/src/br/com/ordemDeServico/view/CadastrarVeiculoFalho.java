@@ -7,7 +7,6 @@ package br.com.ordemDeServico.view;
 import br.com.ordemDeServico.model.dao.DaoException;
 import br.com.ordemDeServico.model.entity.Veiculo;
 import br.com.ordemDeServico.model.entity.Cliente;
-import br.com.ordemDeServico.model.dao.VeiculoDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,7 +18,7 @@ import javax.swing.JOptionPane;
 public class CadastrarVeiculoFalho extends javax.swing.JFrame {
     
     private Veiculo veiculo;
-    private VeiculoDao veiculoDao;
+    
 
     /**
      * Creates new form CadastrarVeiculoFalho
@@ -207,7 +206,7 @@ public class CadastrarVeiculoFalho extends javax.swing.JFrame {
         this.veiculo = new Veiculo();
         
         this.campoVeiculoID.setText(String.valueOf(this.veiculo.getId()));
-        this.campoProprietarioID.setText(String.valueOf(this.veiculo.getProprietarioID()));
+        this.campoProprietarioID.setText(String.valueOf(this.veiculo.getProprietario()));
         this.campoMarca.setText(this.veiculo.getMarca());
         this.campoModelo.setText(this.veiculo.getModelo());
         this.campoAno.setText(String.valueOf(this.veiculo.getAno()));
@@ -218,18 +217,18 @@ public class CadastrarVeiculoFalho extends javax.swing.JFrame {
     private void cadastrarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
         this.veiculo = new Veiculo();
-        this.veiculoDao = new VeiculoDao();
+        
         
         this.veiculo.setId(Long.parseLong(campoVeiculoID.getText()));
-        this.veiculo.setProprietarioID(Long.parseLong(campoProprietarioID.getText()));
+        //this.veiculo.setProprietario(Long.parseLong(campoProprietarioID.getText()));
         this.veiculo.setMarca(campoMarca.getText());
         this.veiculo.setModelo(campoModelo.getText());
         this.veiculo.setAno(Integer.parseInt(campoAno.getText()));
         this.veiculo.setPlaca(campoPlaca.getText());
         
         try {
-            this.veiculoDao.insert(this.veiculo);
-        } catch (DaoException ex) {
+           
+        } catch (Exception ex) {
             Logger.getLogger(CadastrarVeiculoFalho.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Veiculo cadastrado.");

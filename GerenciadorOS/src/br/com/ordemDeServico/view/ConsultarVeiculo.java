@@ -4,7 +4,7 @@
  */
 package br.com.ordemDeServico.view;
 
-import br.com.ordemDeServico.model.dao.VeiculoDao;
+
 import br.com.ordemDeServico.model.entity.Veiculo;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -21,7 +21,7 @@ public class ConsultarVeiculo extends javax.swing.JFrame {
      */
     
     private Veiculo veiculo;
-    private VeiculoDao veiculoDao;
+    
     
     public ConsultarVeiculo() {
         initComponents();
@@ -166,16 +166,15 @@ public class ConsultarVeiculo extends javax.swing.JFrame {
     private void consultarBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarBotaoActionPerformed
         
         veiculo = new Veiculo();
-        VeiculoDao veiculoDao = new VeiculoDao();
-        ArrayList <Veiculo>lista = new ArrayList();
-                
-        lista = (ArrayList)veiculoDao.retrieve(campoPlaca.getText());
+        
+        ArrayList <Veiculo>lista = new ArrayList();             
+        
         
         DefaultTableModel tableModel = (DefaultTableModel) tabelaConsultaVeiculos.getModel();
         tableModel.setRowCount(0);
         
         for(Veiculo veicTemp : lista){
-                tableModel.addRow(new Object[]{veicTemp.getPlaca(),veicTemp.getId(),veicTemp.getProprietarioID(),veicTemp.getMarca(),veicTemp.getModelo(),veicTemp.getAno()});
+                tableModel.addRow(new Object[]{veicTemp.getPlaca(),veicTemp.getId(),veicTemp.getProprietario(),veicTemp.getMarca(),veicTemp.getModelo(),veicTemp.getAno()});
             }
         
         tabelaConsultaVeiculos.setModel(tableModel);

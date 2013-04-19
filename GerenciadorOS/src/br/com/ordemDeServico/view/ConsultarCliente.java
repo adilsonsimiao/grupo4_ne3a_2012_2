@@ -4,7 +4,7 @@
  */
 package br.com.ordemDeServico.view;
 
-import br.com.ordemDeServico.model.dao.ClienteDao;
+import br.com.ordemDeServico.model.dao.GenericDao;
 import br.com.ordemDeServico.model.entity.Cliente;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class ConsultarCliente extends javax.swing.JFrame {
 
     Cliente cliente = new Cliente();
-    ClienteDao daoCliente = new ClienteDao();
+    GenericDao hibernateDAO = new GenericDao();
     List<Cliente> clientes = new ArrayList<>();
     DefaultTableModel tableModel;
 
@@ -75,13 +75,13 @@ public class ConsultarCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 654, 110));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 654, 140));
 
         jLabel1.setText("Nome");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jLabel2.setText("CPF");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 82, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
         getContentPane().add(jTFNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 36, 434, -1));
         getContentPane().add(jTFCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 82, 231, -1));
 
@@ -107,7 +107,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 jBAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
+        getContentPane().add(jBAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, -1, -1));
 
         jBFechar.setText("Fechar");
         jBFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 jBFecharActionPerformed(evt);
             }
         });
-        getContentPane().add(jBFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, -1, -1));
+        getContentPane().add(jBFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
 
         jBExcluir.setText("Excluir");
         jBExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -123,20 +123,20 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 jBExcluirActionPerformed(evt);
             }
         });
-        getContentPane().add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, -1, -1));
+        getContentPane().add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNomeActionPerformed
         try {
-           cliente = daoCliente.selectNome(jTFNome.getText());
+          
 
             if (cliente.getNome().equals(jTFNome.getText())||true) {
                  tableModel = (DefaultTableModel) jTable1.getModel();
                 
 
-                tableModel.addRow(new Object[]{cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getRg(), cliente.getTelefone()});
+                tableModel.addRow(new Object[]{cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getRg()});
                 jTable1.setModel(tableModel);
 
 
@@ -164,13 +164,14 @@ public class ConsultarCliente extends javax.swing.JFrame {
     private void jBCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCpfActionPerformed
         try {
             tableModel = (DefaultTableModel) jTable1.getModel();
-            cliente = daoCliente.selectCpf(jTFCPF.getText());
+            System.out.println(jTFNome.getText());
+            
 
 
 
             
 
-            tableModel.addRow(new Object[]{cliente.getId(),cliente.getNome(), cliente.getCpf(), cliente.getRg(),cliente.getTelefone()});
+            tableModel.addRow(new Object[]{cliente.getId(),cliente.getNome(), cliente.getCpf(), cliente.getRg()});
             jTable1.setModel(tableModel);
 
 
@@ -201,7 +202,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
       for(int i = 0 ; i < clientes.size(); i++){
 
-        daoCliente.delete(tableModel.getValueAt(i, 1).toString());
+       
         
         
          

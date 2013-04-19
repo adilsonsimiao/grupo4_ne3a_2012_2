@@ -1,14 +1,14 @@
  
 package br.com.ordemDeServico.view;
 
-import br.com.ordemDeServico.model.dao.ClienteDao;
+import br.com.ordemDeServico.model.dao.GenericDao;
 import br.com.ordemDeServico.model.entity.Cliente;
 
 
 public class AlterarCliente extends javax.swing.JFrame {
 
 Cliente cliente = new Cliente();    
-ClienteDao daoCliente = new ClienteDao();    
+
     
 String id;
 String nome;
@@ -32,7 +32,7 @@ public AlterarCliente() {
      jTFNomeAlt.setText(cliente.getNome());
      jTFCpfAlt.setText(cliente.getCpf());
      jTFRgAlt.setText(cliente.getRg());
-     jTFTelefoneAlt.setText(cliente.getTelefone());
+     
      jTFId.setEditable(false);
     
     }
@@ -173,11 +173,11 @@ public AlterarCliente() {
         cli.setNome(jTFNomeAlt.getText());
         cli.setCpf(jTFCpfAlt.getText());
         cli.setRg(jTFRgAlt.getText());
-        cli.setTelefone(jTFTelefoneAlt.getText());
+       
         
          
                  
-        daoCliente.update(cliente);
+        
             
         } catch (Exception e) {
                e.printStackTrace();
