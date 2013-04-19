@@ -4,82 +4,85 @@
  */
 package br.com.ordemDeServico.model.dao;
 
+import Util.HibernateUtil;
+import org.hibernate.Session;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
  
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
  
-public  class GenericDao<T> {
+public class GenericDao<T> {
  
-    private  Session session;
-    private  Class<T> persistentClass;
- 
-    public GenericDao() {
-        this.session = new Sessao().retornaSessao();
-        this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+   Session sessao;
+  public Class<T> classeGenerica;
+    public GenericDao(Session s){
+        this.sessao = s;
     }
- 
-    public Session getSession() {
-        return session;
+    
+    public GenericDao(Class<T> classeGen){
+        this.classeGenerica = classeGen;
     }
- 
-    protected void persist(T entity) {
-        try {
-            getSession().getTransaction().begin();
-            getSession().save(entity);
-            getSession().getTransaction().commit();
-        } catch (Throwable t) {
-            getSession().getTransaction().rollback();
-            t.printStackTrace();
-        } finally {
-            close();
+    
+    
+//------------------------------------------------------------------------------    
+    //@Override - Interface serviu apenas para DAO SQL
+    public void persist(T entity) throws RuntimeException {
+        
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        
+        try{
+            this.sessao.beginTransaction().begin();
+            //this.sessao.saveOrUpdate(entity);
+              this.sessao.merge(entity);
+              
+            this.sessao.flush();
+            this.sessao.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println("Erro ao persistir objeto.");
+            this.sessao.getTransaction().rollback();
+        }finally{
+            this.sessao.close();
+        }        
+    }
+
+     
+    //@Override
+    public void delete(T object) throws RuntimeException {
+        
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        
+        try{
+            this.sessao.beginTransaction();
+            this.sessao.delete(object);
+            this.sessao.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println("Erro ao remover objeto.");
+            this.sessao.getTransaction().rollback();
+        }finally{
+            this.sessao.close();
         }
+    
     }
- 
-    protected void update(T entity) {
-        try {
-            getSession().getTransaction().begin();
-            getSession().update(entity);
-            getSession().getTransaction().commit();
-        } catch (Throwable t) {
-            getSession().getTransaction().rollback();
-            t.printStackTrace();
-        } finally {
-            close();
+        
+    //@Override
+    // Busca todo o bd do objeto procurado
+    public List<T> listAll() {
+        
+        List <T> lista = new ArrayList<>();
+        this.sessao = HibernateUtil.getSessionFactory().openSession();
+        
+        try{
+            this.sessao.beginTransaction();
+            lista = this.sessao.createCriteria(classeGenerica).list();
+            this.sessao.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println("Erro ao buscar.");
+            this.sessao.getTransaction().rollback();
+        }finally{
+            this.sessao.close();
         }
+        
+        return lista;
     }
- 
-    protected void delete(T entity) {
-        try {
-            getSession().getTransaction().begin();
-            getSession().delete(entity);
-            getSession().getTransaction().commit();
-        } catch (Throwable t) {
-            getSession().getTransaction().rollback();
-            t.printStackTrace();
-        } finally {
-            close();
-        }
-    }
- 
-    public List<T> findAll() throws Exception {
-        return getSession().createCriteria(persistentClass).list();
-    }
- 
-    public T findByName(String nome) {
-        return (T) getSession().createCriteria(persistentClass)
-                .add(Restrictions.eq("nome", nome).ignoreCase()).uniqueResult();
-    }
- 
-    public T findById(long id) {
-        return (T) getSession().createCriteria(persistentClass)
-                .add(Restrictions.eq("id", id)).uniqueResult();
-    }
- 
-    private void close() {
-        if (getSession() != null && getSession().isOpen()) {
-            getSession().close();
-        }
-    } 
 }
