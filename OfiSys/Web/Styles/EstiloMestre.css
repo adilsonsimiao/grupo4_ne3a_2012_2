@@ -1,0 +1,65 @@
+body {
+   	margin:0 0 5px 0;
+	padding:0;
+	background-color:#F5F9E3;
+	font:italic 14px/1.5em 
+	Verdana, Arial, Serif;
+	height: 100%;
+}
+#topo{	
+	width:auto;
+	height:170px;
+	/* background-color:#753232; */
+	background-image:url("../Images/fundoTopo.png");
+	background-repeat:	no-repeat;
+	/* border-top:1px solid #666; */
+	/* border-bottom:1px dotted #818181; */
+	color:#191919;
+	text-align:left;
+}
+#conteudoEsq {
+	position:absolute;
+	width:190px;
+	top:157px;
+	left:0px;
+	color:#99f;
+	padding-bottom:20px;
+	/* border-bottom:3px double #666; */
+}
+#conteudoDir {
+	position:absolute;
+	width:140px;
+	top:175px;
+	right:5px;
+	color:#99f;
+	padding-bottom:20px;
+	/* border-bottom:3px double #666; */
+}
+#colEsq {
+	background:#F5F9E3;
+}
+#sepEsqcolCentral {
+	margin-left:200px;
+	padding-left:10px;
+	/* background:#666; */
+}
+#colDir {
+	background:#F5F9E3;
+	margin:0px;	
+}
+#sepcolCentralDir {
+	margin-right:150px;
+	padding-right:2px;
+	/* background:#666; */
+}
+#colCentral {	    
+	background:#E4E4E4;
+	color:#333333;
+	padding:2px 10px;
+	padding-bottom: 10px;
+	text-align:justify;
+	border-top:1px dotted #818181;
+	border-left:1px dotted #818181;
+	border-right:1px dotted #818181;
+	border-bottom:1px dotted #818181;
+}	
