@@ -5,14 +5,12 @@
 package br.com.ordemDeServico.view;
 
 import br.com.ordemDeServico.model.dao.ClienteDao;
-import br.com.ordemDeServico.model.dao.Daos;
 import javax.swing.JOptionPane;
 import br.com.ordemDeServico.model.entity.Cliente;
 import br.com.ordemDeServico.model.entity.Endereco;
 import br.com.ordemDeServico.model.entity.Telefone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTable;
 
 /**
  *
@@ -29,8 +27,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
     public CadastrarCliente() {
         initComponents();
-        this.cliente = cliente;
-        
+            
        }
 
     public void setCliente(Cliente cli) {
