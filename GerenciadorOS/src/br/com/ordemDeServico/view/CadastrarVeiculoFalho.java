@@ -206,7 +206,7 @@ public class CadastrarVeiculoFalho extends javax.swing.JFrame {
         this.veiculo = new Veiculo();
         
         this.campoVeiculoID.setText(String.valueOf(this.veiculo.getId()));
-        this.campoProprietarioID.setText(String.valueOf(this.veiculo.getProprietario()));
+        this.campoProprietarioID.setText(String.valueOf(this.veiculo.getProprietarioID()));
         this.campoMarca.setText(this.veiculo.getMarca());
         this.campoModelo.setText(this.veiculo.getModelo());
         this.campoAno.setText(String.valueOf(this.veiculo.getAno()));
@@ -220,7 +220,7 @@ public class CadastrarVeiculoFalho extends javax.swing.JFrame {
         
         
         this.veiculo.setId(Long.parseLong(campoVeiculoID.getText()));
-        //this.veiculo.setProprietario(Long.parseLong(campoProprietarioID.getText()));
+        this.veiculo.setProprietarioID(Long.parseLong(campoProprietarioID.getText()));
         this.veiculo.setMarca(campoMarca.getText());
         this.veiculo.setModelo(campoModelo.getText());
         this.veiculo.setAno(Integer.parseInt(campoAno.getText()));

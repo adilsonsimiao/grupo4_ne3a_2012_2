@@ -14,13 +14,16 @@ import javax.persistence.Id;
 /**
  *
  * @author Adilsoon
- */
+ */    
+
 @Entity
 public class Telefone implements Serializable {
     
     @Id
-    @GeneratedValue       
+    @GeneratedValue(strategy = GenerationType.AUTO)       
     private int id;
+
+  
     
     private String ddd;
     private String telefone;
@@ -47,6 +50,10 @@ public class Telefone implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+      @Override
+    public String toString() {
+        return "Telefone{" + "id=" + id + ", ddd=" + ddd + ", telefone=" + telefone + '}';
     }
     
 }

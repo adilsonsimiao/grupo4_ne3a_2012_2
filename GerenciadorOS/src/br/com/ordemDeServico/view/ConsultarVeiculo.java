@@ -167,14 +167,15 @@ public class ConsultarVeiculo extends javax.swing.JFrame {
         
         veiculo = new Veiculo();
         
-        ArrayList <Veiculo>lista = new ArrayList();             
+        ArrayList <Veiculo>lista = new ArrayList();
+                
         
         
         DefaultTableModel tableModel = (DefaultTableModel) tabelaConsultaVeiculos.getModel();
         tableModel.setRowCount(0);
         
         for(Veiculo veicTemp : lista){
-                tableModel.addRow(new Object[]{veicTemp.getPlaca(),veicTemp.getId(),veicTemp.getProprietario(),veicTemp.getMarca(),veicTemp.getModelo(),veicTemp.getAno()});
+                tableModel.addRow(new Object[]{veicTemp.getPlaca(),veicTemp.getId(),veicTemp.getProprietarioID(),veicTemp.getMarca(),veicTemp.getModelo(),veicTemp.getAno()});
             }
         
         tabelaConsultaVeiculos.setModel(tableModel);

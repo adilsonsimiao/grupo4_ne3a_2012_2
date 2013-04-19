@@ -4,66 +4,36 @@
  */
 package br.com.ordemDeServico.model.entity;
 
-import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.*;
 
 /**
  *
- * @author fernando
+ * @author adilson
  */
-@Entity
-@Table(name = "Servico")
-public class Servico implements Serializable{
-    
-    private long id;
-    private String descricaoServico;
-    private double valor;
-    
-    static final String ID = "id";
-    static final String DESCRICAO_SERVICO = "descricaoServico";
-    static final String VALOR = "valor";
+public class Servico {
 
     public Servico() {
     }
 
-    //------------------------------------------------------------------------------
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    public long getId() {
-        return id;
+    public Servico(long id, String descriçao, String nome, long valor) {
+        this.id = id;
+        this.descriçao = descriçao;
+        this.nome = nome;
+        this.valor = valor;
     }
     
-    @Column(name = "descricaoServico", length = 255, nullable = false)
-    public String getDescricaoServico() {
-        return descricaoServico;
-    }
+    
+    
+    	private long id;
+        private String descriçao;
 
-    @Column(name = "valor", nullable = false, precision = 2)
-    public double getValor() {
-        return valor;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setDescricaoServico(String descricaoServico) {
-        this.descricaoServico = descricaoServico;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }    
-
-    //------------------------------------------------------------------------------
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.descricaoServico);
-        hash = (int) (29 * hash + this.valor);
+        int hash = 5;
+        hash = 61 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 61 * hash + Objects.hashCode(this.descriçao);
+        hash = 61 * hash + Objects.hashCode(this.nome);
+        hash = 61 * hash + (int) (this.valor ^ (this.valor >>> 32));
         return hash;
     }
 
@@ -79,7 +49,10 @@ public class Servico implements Serializable{
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.descricaoServico, other.descricaoServico)) {
+        if (!Objects.equals(this.descriçao, other.descriçao)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
         if (this.valor != other.valor) {
@@ -87,11 +60,56 @@ public class Servico implements Serializable{
         }
         return true;
     }
+        private String nome; 
+        private long valor; 
 
-    @Override
-    public String toString() {
-        return "Servico{" + "id=" + id + ", descricaoServico=" + descricaoServico 
-                + ", valor=" + valor + '}';
+    public long getId() {
+        return id;
     }
-//------------------------------------------------------------------------------
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDescriçao() {
+        return descriçao;
+    }
+
+    public void setDescriçao(String descriçao) {
+        this.descriçao = descriçao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String Nome) {
+        this.nome = Nome;
+    }
+
+    public long getValor() {
+        return valor;
+    }
+
+    public void setValor(long valor) {
+        this.valor = valor;
+    }
+    
+       @Override
+    public String toString() {
+        StringBuilder build = new StringBuilder();
+        build.append("Cliente [id")
+        .append(id)
+        .append(", descricao")
+        .append(descriçao)
+        .append(", nome")
+        .append(nome)
+        .append(", valor")
+        .append(valor)
+        .append("]");           
+        
+        return build.toString();
+                }
+    
+    
 }
