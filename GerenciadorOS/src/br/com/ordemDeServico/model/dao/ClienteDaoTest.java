@@ -24,12 +24,9 @@ public class ClienteDaoTest extends ClienteDao{
         cliente.setNome("adilson");
         cliente.setCpf("0522");
         cliente.setRg("8888");
-        cliente.setTelefone("3333");
+       
              
-      clinDao.update( cliente);
-      
-    cliente=  clinDao.selectNome("ad");
-        System.out.println(cliente);
+  
         
         
     }
