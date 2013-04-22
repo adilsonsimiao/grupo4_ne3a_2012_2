@@ -1,0 +1,246 @@
+body {
+	background:#fff;
+  border-top:16px solid #000;
+	font-family:Arial;
+	font-size:12px;
+}
+
+/* Estrutura */
+.geral {
+	width:962px;
+	margin:20px auto 0;
+	 
+	padding: 10px 10px;
+	margin-top: -15px;
+}
+.topo {
+	border-bottom:1px solid #c0c0c0;
+	padding:0 0 20px 0;
+}
+
+.rodape {
+	margin-top:20px;
+	background:#e2e2e2;
+	padding:10px 0;
+	clear:both;
+}
+
+/* TOPO */
+h1 {
+	background:url(../images/logo.png) no-repeat;
+	height:112px;
+	text-indent:-999px;
+	margin-top
+	
+}
+.topo ul { float:right; margin:-60px 0 0 0; }
+.topo ul li { display:inline; padding:0 0 0 60px; text-transform:uppercase; }
+.topo ul li a { font-weight:bold; text-decoration:none; color:#fe9b00; }
+.topo ul li a:hover { text-decoration:underline; background-color:#0C9AF5;}
+.topo ul li a.ativo{ color:#000; text-decoration:none; }
+#cssmenu ul {
+list-style-type:none;width:auto;position:relative;display:block;height:33px;font-size:1.1em;background:url(../images/bg.png) repeat-x top left;
+font-family:Verdana,Helvetica,Arial,sans-serif;
+border:1px solid #000;
+margin:0;
+padding:0;
+}
+
+#cssmenu li {
+display:block;
+float:left;
+margin:0;
+padding:0;
+}
+
+#cssmenu li a {
+float:left;
+color:#A79787;
+text-decoration:none;
+height:24px;
+padding:9px 15px 0;
+font-weight: normal;
+}
+
+#cssmenu li a:hover,
+#cssmenu .active {
+color:#fff;
+background:url(bg.png) repeat-x top left;
+text-decoration:none;
+}
+
+#cssmenu .active a {
+color:#fff;
+font-weight:700;
+}
+
+
+#cssmenu ul{
+background-color:#B11718;
+}
+#cssmenu li a:hover, #cssmenu li.active {
+background-color:#DE3330;
+}
+
+.manutencao{
+	margin:20px 0 0 0;
+	padding:0 0 20px 0;
+	border-bottom:1px solid #c0c0c0;
+}
+.chamadas { margin:20px 0 0 0; }
+.chamadas .coluna1 { width:285px; float:left; }
+.chamadas .coluna2 { width:285px; float:left; margin-left:50px; }
+.chamadas .coluna3 { width:285px; float:left; margin-left:50px; }
+
+
+.chamadas .coluna1 h2 {
+	background:url(../images/tit_sobrenos.png) no-repeat;
+	width:283px;
+	height:39px;
+	text-indent:-9999px;
+}
+.chamadas .coluna2 h3 {
+	background:url(../images/tit_clientes.png) no-repeat;
+	width:285px;
+	height:39px;
+	text-indent:-9999px;
+}
+.chamadas .coluna3 h4 {
+	background:url(../images/tit_contato.png) no-repeat;
+	width:284px;
+	height:39px;
+	text-indent:-9999px;
+}
+.chamadas p {
+	width:283px;
+	color:#999;
+	margin-bottom:20px;
+	line-height:150%;
+}
+.portfolio {
+	border-top:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0;
+	padding:10px 0 30px 0;
+	clear:both;
+}
+.portfolio h5 {
+	background:url(../images/tit_trabalhos.png) no-repeat;
+	width:152px;
+	height:38px;
+	text-indent:-9999px;
+}
+.portfolio ul { margin-top:10px; }
+.portfolio ul li { display:inline; margin-left:23px; }
+
+/* Rodape */
+.rodape .conteudo-footer {
+	width:962px;
+	margin:0 auto;
+	padding:20px;
+}
+.rodape .conteudo-footer ul { width:350px; }
+.rodape .conteudo-footer ul li { 
+	display:inline;
+	border-left:1px solid #999;
+	padding:0 4px 0 4px;
+}
+.rodape .conteudo-footer ul li.noborder { border:none; }
+.rodape .conteudo-footer ul li a { color:#999; text-decoration:none; }
+.rodape .conteudo-footer ul li a:hover { text-decoration:underline; }
+.rodape .conteudo-footer p { color:#999; margin:8px 0 0 4px; }
+.rodape .conteudo-footer h6 {
+	
+	width:127px;
+	height:86px;
+	text-indent:-9999px;
+	float:right;
+	margin-top:-52px;
+}
+
+
+
+
+
+
+.div.box {
+margin:0 auto;
+width:500px;
+background:#222222;
+position:relative;
+top:50px;
+border:1px solid #262626;
+}
+
+.div.box h1 { 
+color:#ffffff;
+font-size:18px;
+text-transform:uppercase;
+padding:5px 0 5px 5px;
+border-bottom:1px solid #161712;
+border-top:1px solid #161712; 
+}
+
+.div.box label {
+width:100%;
+display: block;
+background:#1C1C1C;
+border-top:1px solid #262626;
+border-bottom:1px solid #161712;
+padding:10px 0 10px 0;
+}
+
+.div.box label span {
+display: block;
+color:#bbbbbb;
+font-size:12px;
+float:left;
+width:100px;
+text-align:right;
+padding:5px 20px 0 0;
+}
+
+.div.box .input_text {
+padding:10px 10px;
+width:200px;
+background:#262626;
+border-bottom: 1px double #171717;
+border-top: 1px double #171717;
+border-left:1px double #333333;
+border-right:1px double #333333;
+}
+
+.div.box .message{
+padding:7px 7px;
+width:350px;
+background:#262626;
+border-bottom: 1px double #171717;
+border-top: 1px double #171717;
+border-left:1px double #333333;
+border-right:1px double #333333;
+overflow:hidden;
+height:150px;
+}
+
+.div.box .button
+{
+margin:0 0 10px 0;
+padding:4px 7px;
+background:#CC0000;
+border:0px;
+position: relative;
+top:10px;
+left:382px;
+width:100px;
+border-bottom: 1px double #660000;
+border-top: 1px double #660000;
+border-left:1px double #FF0033;
+border-right:1px double #FF0033;
+}
+.comentario p{
+ margin: 50px;
+  font-family: Verdana, Geneva, Arial, sans-serif; 
+  font-size: small; 
+  line-height: 180%; 
+
+
+}

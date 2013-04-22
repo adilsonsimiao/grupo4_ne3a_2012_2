@@ -3,7 +3,84 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
                        
-<script type="text/javascript" src="../scripts/Contato.js"></script>
+<script type="text/javascript">
+function validarCPF(cpf) {
+cpf = cpf.replace(/[^\d]+/g,'');
+if(cpf == '') return false;
+// Elimina CPFs invalidos conhecidos
+if (cpf.length != 11 ||
+cpf == "00000000000" ||
+cpf == "11111111111" ||
+cpf == "22222222222" ||
+cpf == "33333333333" ||
+cpf == "44444444444" ||
+cpf == "55555555555" ||
+cpf == "66666666666" ||
+cpf == "77777777777" ||
+cpf == "88888888888" ||
+cpf == "99999999999")
+return false;
+// Valida 1o digito
+add = 0;
+for (i=0; i < 9; i ++)
+add += parseInt(cpf.charAt(i)) * (10 - i);
+rev = 11 - (add % 11);
+if (rev == 10 || rev == 11)
+rev = 0;
+if (rev != parseInt(cpf.charAt(9)))
+return false;
+// Valida 2o digito
+add = 0;
+for (i = 0; i < 10; i ++)
+add += parseInt(cpf.charAt(i)) * (11 - i);
+rev = 11 - (add % 11);
+if (rev == 10 || rev == 11)
+rev = 0;
+if (rev != parseInt(cpf.charAt(10)))
+return false;
+return true;
+}
+function valida(contato) {
+if (contato.nome.value=="") {
+alert("Preencha o nome corretamente.");
+contato.nome.focus();
+return false;
+}
+var filtro_mail = /^.+@.+\..{2,3}$/
+if (!filtro_mail.test(contato.email.value) || contato.email.value=="") {
+alert("Preencha o e-mail corretamente.");
+contato.email.focus();
+return false;
+}
+if (contato.cpf.value=="") {
+alert("Preencha o CPF corretamente.");
+contato.cpf.focus();
+return false;
+}
+if (validarCPF(contato.cpf.value)==false) {
+alert("Preencha o CPF corretamentGGAGAG.");
+contato.cpf.focus();
+return false;
+}
+if (contato.dataNasc.value=="" || contato.dataNasc.value.length != 10) {
+alert("Preencha a data de nascimento corretamente.");
+contato.dataNasc.focus();
+return false;
+}
+if (contato.assunto.value.length<10) {
+alert("Preencha o assunto corretamente.");
+contato.assunto.focus();
+return false;
+}
+if (contato.textoArea.value.length<300) {
+alert("Preencha a menssagem com pelo menos 300 caracteres.");
+contato.textoArea.focus();
+return false;
+}
+alert("Mensagem enviada com sucesso!");
+}
+</script>
+
             
             <title>Sistema de Ordem de Serviço</title>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -30,7 +107,7 @@
 <hr></hr>
 <p style="font-size: 30px; text-align: center">Contato:</p>                         
 
-<form name="contato" action="mailto:rocha.tsi@gmail" onsubmit="return valida(this)" method="post" id="faleconosco">
+<form name="contato" action="mailto:rocha.tsi@gmail" onsubmit="return valida(this);" method="post" id="faleconosco">
 
                 <div class="fdContainer">
                     <div class="linha">
@@ -40,7 +117,7 @@
                     </div>
                      <div class="linha">
                         <div class="input">
-                            <input name="nome" type="text"  id="nomez"/>
+                            <input name="nome" type="text" />
                         </div>
                     </div>
 
@@ -51,7 +128,7 @@
                     </div>
                       <div class="linha">
                         <div class="input">
-                            <input name="email" type="text" id="emailz" />
+                            <input name="email" type="text" />
                         </div>
                     </div>
 
@@ -62,18 +139,18 @@
                     </div>
                       <div class="linha">
                         <div class="input">
-                            <input name="cpf" type="text" id="cpfz"/>
+                            <input name="cpf" type="text" />
                         </div>
                     </div>
 
                     <div class="linha">
                         <div class="label">
-                            <label>Data de Nascimento (dd/mm/aaaa): </label>
+                            <label>Data de Nascimento: </label>
                         </div>
                     </div>
                       <div class="linha">
                         <div class="input">
-                            <input name="dataNasc" type="text" value="" maxlength="10" id="nascz"onfocus="if (this.value=='dd/mm/aaaa'){this.value='';}" onblur="if (this.value==''){this.value='dd/mm/aaaa';}"/>
+                            <input name="dataNasc" type="text" value="dd/mm/aaaa" maxlength="10" onfocus="if (this.value=='dd/mm/aaaa'){this.value='';}" onblur="if (this.value==''){this.value='dd/mm/aaaa';}"/>
                         </div>
                     </div>
 
@@ -84,7 +161,7 @@
                     </div>
                       <div class="linha">
                         <div class="input">
-                            <input name="assunto" type="text" id="assuntoz"/>
+                            <input name="assunto" type="text" />
                         </div>
                     </div>
 
@@ -95,14 +172,14 @@
                     </div>
                      <div class="area">
                         <div class="textarea">
-                            <textarea name="textoArea" cols="47" rows="10" id="msgz"></textarea>
+                            <textarea name="textoArea" cols="47" rows="10"></textarea>
                         </div>
                     </div>
 
                 </div>
 
                 <div class="botoes">
-                    <input type="button" onclick="confa()" id="btnLimpar" value="Limpar" />
+                    <input type="reset" id="btnLimpar" value="Limpar" />
                     <input type="submit" id="btnEnviar" value="Enviar" />
                 </div>
 
