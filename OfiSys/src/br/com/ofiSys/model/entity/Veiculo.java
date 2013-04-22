@@ -4,9 +4,14 @@
  */
 package br.com.ofiSys.model.entity;
 
+import br.com.ofiSys.annotations.ClassProperty;
+import br.com.ofiSys.annotations.Colors;
+import br.com.ofiSys.annotations.MethodProperty;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
+import java.lang.annotation.Annotation.*;
+import org.hibernate.criterion.Order;
 
 /**
  *
@@ -15,120 +20,112 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Veiculo")
+@ClassProperty(label="Veiculo" , width=500, height=200)
 public class Veiculo implements Serializable{
     
-    private long id;
-    //private long proprietarioID;
+    private long id;    
     private String marca;
     private String modelo; 
     private int ano;
     private String placa;
     private int km;
-
+    private Cliente proprietario;
+    
     static final String ID = "id";
     static final String MARCA = "marca";
     static final String MODELO = "modelo";
     static final String ANO = "ano";
     static final String PLACA = "placa";
     static final String KM = "Km";
+    static final String PROPRIETARIO = "proprietario";
     
     public Veiculo() {
     }
-
-    public Veiculo(long id, String marca, String modelo, int ano, String placa, int Km) {
-        this.id = id;
-        //this.proprietarioID = proprietarioID;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.ano = ano;
-        this.placa = placa;  
-        this.km = km;
-    }    
 //------------------------------------------------------------------------------   
-   
+    
+    @MethodProperty(label="Id", groupName="Geral")
     @Id  
-    @GeneratedValue  
+    @GeneratedValue(strategy = GenerationType.AUTO)  
     @Column(name="id")
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
-    }
-
-    
-    /*
-    @Column(name = "ProprietarioID")
-    public long getProprietarioID(){
-        return proprietarioID;
-    }
-    
-    public void setProprietarioID(long proprietarioID){
-        this.proprietarioID = proprietarioID;
-    }
-    */
+    }    
     
     
-    @Column(name = "marca")
+    @MethodProperty(label="Marca", groupName="Geral")
+    @Column(name = "marca", nullable = false, length = 250)
     public String getMarca() {
         return marca;
     }
-
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
     
-    @Column(name = "modelo")
+    @MethodProperty(label="Modelo", groupName="Geral")
+    @Column(name = "modelo", nullable = false, length = 250 )
     public String getModelo() {
         return modelo;
     }
-
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
 
     
-    @Column(name = "ano")
+    @MethodProperty(label="Ano", groupName="Geral")
+    @Column(name = "ano", nullable = false, length = 4)
     public int getAno() {
         return ano;
     }
-
     public void setAno(int ano) {
         this.ano = ano;
     }
 
     
-    @Column(name = "placa")
+    @MethodProperty(label="Placa", groupName="Geral")
+    @Column(name = "placa", nullable = false, length = 7, unique = true, updatable = true)
     public String getPlaca() {
         return placa;
     }
-
     public void setPlaca(String placa) {
         this.placa = placa;
     }
     
-    @Column(name = "km")
+    
+    @MethodProperty(label="Km", groupName="Geral")
+    @Column(name = "km", nullable = true, length = 7)
     public int getKm() {
         return km;
     }
-
     public void setKm(int km) {
         this.km = km;
     }
-//------------------------------------------------------------------------------    
+    
+    
+    @MethodProperty(label="Proprietario", cascadeDelete=true)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)    
+    public Cliente getProprietario() {        
+        return proprietario;
+    }
+    public void setProprietario(Cliente proprietario) {
+        this.proprietario = proprietario;
+    }
 
+
+//------------------------------------------------------------------------------
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
-        //hash = 47 * hash + (int) (this.proprietarioID ^ (this.proprietarioID >>> 32));
-        hash = 47 * hash + Objects.hashCode(this.marca);
-        hash = 47 * hash + Objects.hashCode(this.modelo);
-        hash = 47 * hash + (int) (this.ano ^ (this.ano >>> 32));
-        hash = 47 * hash + Objects.hashCode(this.placa);
-        hash = 47 * hash + (int) (this.km ^(this.km >>> 32));
+        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 59 * hash + Objects.hashCode(this.marca);
+        hash = 59 * hash + Objects.hashCode(this.modelo);
+        hash = 59 * hash + this.ano;
+        hash = 59 * hash + Objects.hashCode(this.placa);
+        hash = 59 * hash + this.km;
+        hash = 59 * hash + Objects.hashCode(this.proprietario);
         return hash;
     }
 
@@ -141,60 +138,36 @@ public class Veiculo implements Serializable{
             return false;
         }
         final Veiculo other = (Veiculo) obj;
-        
         if (this.id != other.id) {
             return false;
         }
-        
-        /*
-        if (this.proprietarioID != other.proprietarioID){
-            return false;
-        }
-        */ 
-        
         if (!Objects.equals(this.marca, other.marca)) {
             return false;
         }
-        
         if (!Objects.equals(this.modelo, other.modelo)) {
             return false;
         }
-        
         if (this.ano != other.ano) {
             return false;
         }
-        
         if (!Objects.equals(this.placa, other.placa)) {
             return false;
         }
-        
-        if (!Objects.equals(this.km, other.km)){
+        if (this.km != other.km) {
             return false;
         }
-       
+        if (!Objects.equals(this.proprietario, other.proprietario)) {
+            return false;
+        }
         return true;
     }
-    
+
     @Override
     public String toString() {
-        StringBuilder build = new StringBuilder();
-        build.append("veiculo id: ")
-        .append(id)
-        .append(", proprietario id: ")
-        //.append(proprietarioID)        
-        .append(", marca: ")
-        .append(marca)
-        .append(", modelo: ")
-        .append(modelo)
-        .append(", ano: ")
-        .append(ano)
-        .append(", placa: ")
-        .append(placa)
-        .append(", Km: ")
-        .append(km)
-        .append("]");
-        
-        return build.toString();
-    }
-//------------------------------------------------------------------------------   
+        return "Veiculo{" + "id=" + id + ", marca=" + marca 
+                + ", modelo=" + modelo + ", ano=" + ano 
+                + ", placa=" + placa + ", km=" + km 
+                + ", proprietario=" + proprietario + '}';
+    }    
+//------------------------------------------------------------------------------    
 }
