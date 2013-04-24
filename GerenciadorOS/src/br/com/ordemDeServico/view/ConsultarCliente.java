@@ -249,7 +249,6 @@ public class ConsultarCliente extends javax.swing.JDialog {
          
           
         for (Cliente cliente1 : clientes) {
-           // System.out.println(clientes.toString());
             if (((int)this.jTableCliente.getValueAt(row, 0))==cliente1.getId()) {
                 CadastrarCliente cadastrarCliente = new CadastrarCliente();
                        cadastrarCliente.setVisible(true);
@@ -261,6 +260,7 @@ public class ConsultarCliente extends javax.swing.JDialog {
             }
        
     }//GEN-LAST:event_jBAlterarActionPerformed
+    dispose();
     }
     private void jBTConsulNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTConsulNomeActionPerformed
           
