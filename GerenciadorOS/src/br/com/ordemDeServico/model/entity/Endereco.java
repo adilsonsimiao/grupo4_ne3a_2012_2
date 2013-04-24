@@ -5,9 +5,12 @@
 package br.com.ordemDeServico.model.entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /**
@@ -15,18 +18,32 @@ import javax.persistence.Id;
  * @author adilson
  */
 @Entity
+@Table(name = "Endereco")
 public class Endereco implements Serializable {   
     
-    @Id
-    @GeneratedValue
+  @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
+    @Column(name = "Marca", length=50)   
     private String logradouro;
+   
+    @Column(name = "Casa", length=50)   
     private String complemento;
+   
+    @Column(name = "Numero", length=50)      
     private String numero;
+    
+    @Column(name = "Bairro", length=50)   
     private String bairro;
+    
+    @Column(name = "Cidade", length=50)   
     private String cidade; 
+    
+    @Column(name = "Uf", length=2)   
     private String uf;
+    
+    @Column(name = "Cep", length=9)   
     private String cep; 
    
     
@@ -99,38 +116,9 @@ public class Endereco implements Serializable {
         this.id = id;
     }
 
-   
-
-    @Override
+   @Override
     public String toString() {
-        StringBuilder build = new StringBuilder();
-        build.append("Cliente [logradouro")
-        .append(logradouro)
-        .append(", complemento")
-        .append(complemento)
-        .append(", numero")
-        .append(numero)
-        .append(", bairro")
-        .append(bairro)
-        .append(", cidade")
-        .append(cidade)
-        .append(", uf")
-        .append(uf)
-        .append(", cep")
-        .append(cep)               
-        .append("]");      
-                
-        
-        return build.toString();
-                }
-
-
-//    public int getCliente_id() {
-//        return cliente_id;
-//    }
-//
-//    public void setCliente_id(int cliente_id) {
-//        this.cliente_id = cliente_id;
-//    }
+        return "Endereco{" + "id=" + id + ", logradouro=" + logradouro + ", complemento=" + complemento + ", numero=" + numero + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", cep=" + cep + '}';
+    }
     
 }

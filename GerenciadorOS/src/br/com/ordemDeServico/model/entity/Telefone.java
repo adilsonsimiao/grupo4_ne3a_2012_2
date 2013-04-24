@@ -5,11 +5,12 @@
 package br.com.ordemDeServico.model.entity;
 
 import java.io.Serializable;
-import javax.annotation.Generated;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -17,16 +18,21 @@ import javax.persistence.Id;
  */    
 
 @Entity
+
+@Table(name = "TELEFONES")
 public class Telefone implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)       
+    @Column(name = "ID", nullable = false)
     private int id;
 
   
-    
+     @Column(name = "DDD", length = 50)
     private String ddd;
-    private String telefone;
+      
+    @Column(name = "NUMERO", length=50)
+    private String numero;
 
     public int getId() {
         return id;
@@ -45,15 +51,25 @@ public class Telefone implements Serializable {
     }
 
     public String getTelefone() {
-        return telefone;
+        return numero;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefone(String numero) {
+        this.numero = numero;
     }
-      @Override
+    
+    
+   
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    @Override
     public String toString() {
-        return "Telefone{" + "id=" + id + ", ddd=" + ddd + ", telefone=" + telefone + '}';
+        return "Telefone{" + "id=" + id + ", ddd=" + ddd + ", numero=" + numero + '}';
     }
+
+   
     
 }

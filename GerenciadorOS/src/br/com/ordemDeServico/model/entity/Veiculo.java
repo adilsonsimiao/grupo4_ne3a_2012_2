@@ -4,35 +4,44 @@
  */
 package br.com.ordemDeServico.model.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
-import javax.xml.crypto.Data;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author adilson
  */
-public class Veiculo {
+@Entity
+@Table(name = "VEICULO")
+public class Veiculo implements Serializable {
 
-    private long id;
-    private long proprietarioID;
+    
+     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", nullable = false) 
+    private int id;
+
+     @Column(name = "Marca", length=50)    
     private String marca;
+   
+     @Column(name = "MODELO", length = 50)
     private String modelo; 
-    private int ano;
+    
+     @Column(name = "Ano", length=59)
+    private String ano;
+      @Column(name = "PLACA", length=50)
     private String placa;
-    // private long chassis; 
+  
 
     public Veiculo() {
     }
 
-    public Veiculo(long id, long proprietarioID, String marca, String modelo, int ano, String placa) {
-        this.id = id;
-        this.proprietarioID = proprietarioID;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.ano = ano;
-        this.placa = placa;
-        //this.chassis = chassis;
-    }
    
    
 
@@ -40,10 +49,9 @@ public class Veiculo {
     public int hashCode() {
         int hash = 5;
         hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 47 * hash + (int) (this.proprietarioID ^ (this.proprietarioID >>> 32));
         hash = 47 * hash + Objects.hashCode(this.marca);
         hash = 47 * hash + Objects.hashCode(this.modelo);
-        hash = 47 * hash + (int) (this.ano ^ (this.ano >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.ano);
         hash = 47 * hash + Objects.hashCode(this.placa);
         
         return hash;
@@ -62,11 +70,7 @@ public class Veiculo {
         if (this.id != other.id) {
             return false;
         }
-        
-        if (this.proprietarioID != other.proprietarioID){
-            return false;
-        }
-        
+          
         if (!Objects.equals(this.marca, other.marca)) {
             return false;
         }
@@ -86,23 +90,14 @@ public class Veiculo {
         return true;
     }
    
-
-    public long getId() {
+    public int  getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
     
-    public long getProprietarioID(){
-        return proprietarioID;
-    }
-    
-    public void setProprietarioID(long proprietarioID){
-        this.proprietarioID = proprietarioID;
-    }
-
     public String getMarca() {
         return marca;
     }
@@ -119,11 +114,11 @@ public class Veiculo {
         this.modelo = Modelo;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int Ano) {
+    public void setAno(String Ano) {
         this.ano = Ano;
     }
 
@@ -135,26 +130,12 @@ public class Veiculo {
         this.placa = Placa;
     }
 
-
-    
     @Override
     public String toString() {
-        StringBuilder build = new StringBuilder();
-        build.append("veiculo id: ")
-        .append(id)
-        .append(", proprietario id: ")
-        .append(proprietarioID)        
-        .append(", marca: ")
-        .append(marca)
-        .append(", modelo: ")
-        .append(modelo)
-        .append(", ano: ")
-        .append(ano)
-        .append(", placa: ")
-        .append(placa)        
-        .append("]");
-        
-        return build.toString();
+        return "Veiculo{" + "id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", ano=" + ano + ", placa=" + placa + '}';
     }
+
+
+    
    
 }
