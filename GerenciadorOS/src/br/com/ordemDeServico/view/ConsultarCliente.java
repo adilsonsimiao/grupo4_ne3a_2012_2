@@ -253,6 +253,8 @@ public class ConsultarCliente extends javax.swing.JDialog {
             if (((int)this.jTableCliente.getValueAt(row, 0))==cliente1.getId()) {
                 CadastrarCliente cadastrarCliente = new CadastrarCliente();
                        cadastrarCliente.setVisible(true);
+                       
+                       
                        cadastrarCliente.setCliente(cliente1);
               
                

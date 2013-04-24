@@ -4,6 +4,7 @@
  */
 package br.com.ordemDeServico.model.entity;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,31 +12,56 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author adilson
  */
 @Entity
-public class Cliente {
-
+@Table(name = "Cliente")
+public class Cliente implements Serializable {
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+   @Column(name ="ID", nullable = false)
     private int id;
-// @Column(nullable = false)
+ 
+    @Column(name ="Nome", nullable = false)
     private String nome;
-// @Column(nullable = false)  
+ 
+ @Column(name ="CPF",nullable = false)  
     private String cpf;
-//  @Column(nullable = false)
+
+ @Column(name ="RG",nullable = false)
     private String rg;
-    @OneToOne(cascade = CascadeType.ALL)
+   
+ @OneToOne(cascade = CascadeType.ALL)
     Endereco endereco;
+ @OneToMany(cascade = CascadeType.ALL)
+ @JoinColumn(name = "idCliente")
+         Telefone telefone;
+ 
+// @OneToMany(cascade = CascadeType.ALL)
+// @JoinColumn(name = "idCliente")
+// private List<Telefone> telefone = new ArrayList<>();
+//    
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "idCliente")
-    private List<Telefone> telefone = new ArrayList<>();
+     private List<Veiculo> veiculo = new ArrayList<>();
+
+    public List<Veiculo> getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo.add(veiculo); 
+        
+    }
 
     public Cliente() {
     }
@@ -50,13 +76,21 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public List<Telefone> getTelefone() {
+//    public List<Telefone> getTelefone() {
+//        return telefone;
+//    }
+//
+//    public void setTelefone(Telefone telefone) {
+//        this.telefone.add(telefone);
+
+    public Telefone getTelefone() {
         return telefone;
     }
 
     public void setTelefone(Telefone telefone) {
-        this.telefone.add(telefone);
+        this.telefone = telefone;
     }
+//    }
 
     public String getRg() {
         return rg;
@@ -92,8 +126,11 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", endereco=" + endereco + ", telefone=" + telefone + '}';
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", endereco=" + endereco + ", telefone=" + telefone + ", veiculo=" + veiculo + '}';
     }
+
+ 
+ 
 
 
 }
