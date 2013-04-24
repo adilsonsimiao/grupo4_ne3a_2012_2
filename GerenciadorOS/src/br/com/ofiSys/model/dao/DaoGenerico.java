@@ -7,7 +7,6 @@ package br.com.ofiSys.model.dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -41,7 +40,7 @@ public class DaoGenerico<T>{
             System.out.println("Erro ao persistir objeto.");
             this.sessao.getTransaction().rollback();
         }finally{
-            this.sessao.close();
+            
         }        
     }
 
