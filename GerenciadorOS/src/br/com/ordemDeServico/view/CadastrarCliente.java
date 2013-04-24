@@ -5,10 +5,14 @@
 package br.com.ordemDeServico.view;
 
 import br.com.ordemDeServico.model.dao.ClienteDao;
+import br.com.ordemDeServico.model.dao.VeiculoDao;
 import javax.swing.JOptionPane;
 import br.com.ordemDeServico.model.entity.Cliente;
 import br.com.ordemDeServico.model.entity.Endereco;
 import br.com.ordemDeServico.model.entity.Telefone;
+import br.com.ordemDeServico.model.entity.Veiculo;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,26 +22,26 @@ import java.util.logging.Logger;
  */
 public class CadastrarCliente extends javax.swing.JFrame {
     
-    Cliente cliente;
-    Endereco endereco;
-    Telefone telefone;
+    Cliente  cliente = new Cliente();
+    Endereco endereco = new Endereco();
+    Telefone telefone = new Telefone();
     ClienteDao clienteDao = new ClienteDao();
-    
-    
-
+    Veiculo veiculo = new Veiculo();
+    VeiculoDao veiculoDao = new VeiculoDao();
+    List<Telefone> tel = new ArrayList<>();
+     List<Veiculo> vei = new ArrayList<>();
     public CadastrarCliente() {
         initComponents();
+          
             
        }
 
     public void setCliente(Cliente cli) {
-               
                this.preencheTelaCadastro(cli);
+               this.cliente = cli;
     }
 
-       
-
-    @SuppressWarnings("unchecked")
+       @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -81,6 +85,15 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jTFormaNumero = new javax.swing.JFormattedTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jTfMARCA = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jTFANO = new javax.swing.JTextField();
+        jTFMODELO = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jTFPLACA = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jBTCadastrar = new javax.swing.JButton();
@@ -288,10 +301,63 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19)
                     .addComponent(jTFormaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("CONTATO", jPanel4);
+
+        jLabel21.setText("MARCA:");
+
+        jLabel22.setText("MODELO:");
+
+        jLabel23.setText("ANO:");
+
+        jLabel24.setText("PLACA:");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel23))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTFANO, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                    .addComponent(jTfMARCA))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTFMODELO, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFPLACA, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jTfMARCA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFMODELO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFANO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24)
+                    .addComponent(jTFPLACA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(198, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("VEICULO", jPanel5);
 
         jPanel2.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
@@ -327,42 +393,42 @@ public class CadastrarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void jBTCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTCadastrarActionPerformed
-        cliente = new Cliente();
-        endereco = new Endereco();
-        telefone = new Telefone();
+      
+        System.out.println(cliente.getId());
+        
+       this.cliente.setNome(jTFNome.getText());
+       this.cliente.setCpf(jTFCPF.getText());
+       this.cliente.setRg(jTFRG.getText());
+        
+       this.veiculo.setMarca(jTfMARCA.getText());
+       this.veiculo.setModelo(jTFMODELO.getText());
+       this.veiculo.setPlaca(jTFPLACA.getText());
+       this.veiculo.setAno(jTFANO.getText());
+        
+       this.endereco.setLogradouro(jTFLogradouro.getText());
+       this.endereco.setComplemento(jTFComplemento.getText());
+       this.endereco.setNumero(jTFNumero.getText());
+       this.endereco.setCidade(jTFCidade.getText());
+       this.endereco.setUf(jCbUF.getName());
+       this.endereco.setCep(jTFormaCep.getText());
+       this.endereco.setBairro(jTFBairro.getText());
 
-
-        cliente.setNome(jTFNome.getText());
-        cliente.setCpf(jTFCPF.getText());
-        cliente.setRg(jTFRG.getText());
-
-
-        endereco.setLogradouro(jTFLogradouro.getText());
-        endereco.setComplemento(jTFComplemento.getText());
-        endereco.setNumero(jTFNumero.getText());
-        endereco.setCidade(jTFCidade.getText());
-        endereco.setUf(jCbUF.getName());
-        endereco.setCep(jTFormaCep.getText());
-        endereco.setBairro(jTFBairro.getText());
-
-
-
-
-        telefone.setDdd(jFormaDD.getText());
-        telefone.setTelefone(jFormaNumero.getText());
-
-
-
-        telefone.setDdd(jFormaDD.getText());
-        telefone.setTelefone(jFormaNumero.getText());
-        cliente.setEndereco(endereco);
-        cliente.setTelefone(telefone);
-
+        this.telefone.setDdd(jFormaDD.getText());
+        this.telefone.setTelefone(jFormaNumero.getText());
+        
+        this.telefone.setDdd(jFormaDD.getText());
+        this.telefone.setTelefone(jFormaNumero.getText());
+        this.cliente.setEndereco(endereco);
+        this.cliente.setVeiculo(veiculo);
+        
+        
+        
         
         try {
+              System.out.println(cliente.getId());      
+           
+              clienteDao.persist(cliente);
             
-            clienteDao.persist(cliente);
-
 
 
         } catch (Exception ex) {
@@ -403,7 +469,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
   
    
     public void preencheTelaCadastro(Cliente cli) {
-           cli.setId(cli.getId());
+        System.out.println(cli.getId());   
+        cli.setId(cli.getId());
+        System.out.println(cli.getId()); 
             jTFNome.setText(cli.getNome());
             jTFRG.setText(cli.getRg());
             jTFCPF.setText(cli.getCpf());
@@ -415,11 +483,36 @@ public class CadastrarCliente extends javax.swing.JFrame {
             jTFCidade.setText(cli.getEndereco().getCidade());
             jCbUF.setName(cli.getEndereco().getUf());
             jTFormaCep.setText(cli.getEndereco().getCep());
-//            jFormaDD.setText(cli.getTelefone().get(0).getDdd().toString());
-//            jFormaNumero.setText(cli.getTelefone().get(0).getTelefone().toString());
-////        cliente.setEndereco(endereco);
-//        cliente.setTelefone(telefone);
-//             
+            
+                tel = cli.getTelefone();
+                //System.out.println(tel);
+                for (Telefone telefone1 : tel) {
+                this.telefone = telefone1;
+        }
+                  vei = cli.getVeiculo();
+                //System.out.println(tel);
+                for (Veiculo veiculos : vei) {
+                this.veiculo = veiculos;
+        }
+              
+                
+                
+            System.out.println("aqui");
+            jFormaDD.setText(telefone.getDdd());
+            jFormaNumero.setText(telefone.getTelefone());
+           
+            
+                                     
+              jTFANO.setText(veiculo.getAno());
+              jTFMODELO.setText(veiculo.getModelo());
+              jTFPLACA.setText(veiculo.getPlaca());
+              jTfMARCA.setText(veiculo.getMarca());
+              jTFComplemento.setText(cli.getEndereco().getComplemento());
+              
+               
+           
+               
+            
        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -444,6 +537,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -455,17 +552,22 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTFANO;
     private javax.swing.JTextField jTFBairro;
     private javax.swing.JFormattedTextField jTFCPF;
     private javax.swing.JTextField jTFCidade;
     private javax.swing.JTextField jTFComplemento;
     private javax.swing.JTextField jTFLogradouro;
+    private javax.swing.JTextField jTFMODELO;
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFNumero;
+    private javax.swing.JTextField jTFPLACA;
     private javax.swing.JTextField jTFRG;
     private javax.swing.JFormattedTextField jTFormaCep;
     private javax.swing.JFormattedTextField jTFormaNumero;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTfMARCA;
     // End of variables declaration//GEN-END:variables
 }
