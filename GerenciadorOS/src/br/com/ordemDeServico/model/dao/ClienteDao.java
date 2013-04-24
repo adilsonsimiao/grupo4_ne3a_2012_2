@@ -6,8 +6,6 @@ package br.com.ordemDeServico.model.dao;
 import Util.HibernateUtil;
 import br.com.ordemDeServico.model.entity.Cliente;
 import java.util.List;
-import javax.swing.JOptionPane;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -89,7 +87,7 @@ public List buscaCl(String nome) {
 
         sessao.getTransaction().commit();
         busca = sessao.createCriteria(Cliente.class).add( Restrictions.like("nome", "%"+nome+"%")).list();
-        sessao.close();
+        //sessao.close();
         
         return busca;
     }
@@ -100,7 +98,6 @@ public List buscaCl(String nome) {
         sessao = HibernateUtil.getSessionFactory().openSession();
         sessao.beginTransaction().begin();
         List <Cliente> busca = null;
-        //         busca = this.sessao.createCriteria(Veiculo.class).list();
         sessao.getTransaction().commit();
         busca = sessao.createCriteria(Cliente.class).add( Restrictions.like("nome", "%"+cpf+"%")).list();
         sessao.close();
