@@ -24,8 +24,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Cliente")
-public class Cliente implements Serializable {
-   
+public class Cliente implements Serializable { 
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
    @Column(name ="ID", nullable = false)
@@ -42,19 +43,19 @@ public class Cliente implements Serializable {
    
  @OneToOne(cascade = CascadeType.ALL)
     Endereco endereco;
- @OneToMany(cascade = CascadeType.ALL)
- @JoinColumn(name = "idCliente")
-         Telefone telefone;
  
-// @OneToMany(cascade = CascadeType.ALL)
-// @JoinColumn(name = "idCliente")
-// private List<Telefone> telefone = new ArrayList<>();
-//    
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCliente")
-     private List<Veiculo> veiculo = new ArrayList<>();
-
-    public List<Veiculo> getVeiculo() {
+  private List<Telefone> telefone;
+  
+  
+    
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name= "IDCliente")
+     private List<Veiculo> veiculo;
+    
+   
+  public List<Veiculo> getVeiculo() {
         return veiculo;
     }
 
@@ -63,7 +64,21 @@ public class Cliente implements Serializable {
         
     }
 
+    public List<Telefone> getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Telefone telefone) {
+        System.out.println(telefone);
+        this.telefone.add(telefone);
+        
+    }
+  
+    
+    
     public Cliente() {
+        this.veiculo = new ArrayList<>();
+        this.telefone = new ArrayList<>();
     }
 
     
@@ -76,21 +91,8 @@ public class Cliente implements Serializable {
         this.endereco = endereco;
     }
 
-//    public List<Telefone> getTelefone() {
-//        return telefone;
-//    }
-//
-//    public void setTelefone(Telefone telefone) {
-//        this.telefone.add(telefone);
 
-    public Telefone getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(Telefone telefone) {
-        this.telefone = telefone;
-    }
-//    }
+  
 
     public String getRg() {
         return rg;
