@@ -5,43 +5,47 @@
 package br.com.ordemDeServico.view;
 
 import br.com.ordemDeServico.model.dao.ClienteDao;
-import br.com.ordemDeServico.model.dao.VeiculoDao;
+import Util.ValidacaoView;
 import javax.swing.JOptionPane;
 import br.com.ordemDeServico.model.entity.Cliente;
 import br.com.ordemDeServico.model.entity.Endereco;
 import br.com.ordemDeServico.model.entity.Telefone;
 import br.com.ordemDeServico.model.entity.Veiculo;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Adilsoon
  */
 public class CadastrarCliente extends javax.swing.JFrame {
-    
-    Cliente  cliente = new Cliente();
+
+    Cliente cliente = new Cliente();
     Endereco endereco = new Endereco();
     Telefone telefone = new Telefone();
     ClienteDao clienteDao = new ClienteDao();
     Veiculo veiculo = new Veiculo();
-    VeiculoDao veiculoDao = new VeiculoDao();
+    ValidacaoView validar = new ValidacaoView();
     List<Telefone> tel = new ArrayList<>();
-     List<Veiculo> vei = new ArrayList<>();
+    List<Veiculo> veiculos = new ArrayList<>();
+
     public CadastrarCliente() {
         initComponents();
-          
-            
-       }
 
-    public void setCliente(Cliente cli) {
-               this.preencheTelaCadastro(cli);
-               this.cliente = cli;
     }
 
-       @SuppressWarnings("unchecked")
+    public void setCliente(Cliente cli) {
+        this.preencheTelaCadastro(cli);
+        this.cliente = cli;
+
+
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -393,48 +397,83 @@ public class CadastrarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void jBTCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTCadastrarActionPerformed
-      
-        System.out.println(cliente.getId());
-        
-       this.cliente.setNome(jTFNome.getText());
-       this.cliente.setCpf(jTFCPF.getText());
-       this.cliente.setRg(jTFRG.getText());
-        
-       this.veiculo.setMarca(jTfMARCA.getText());
-       this.veiculo.setModelo(jTFMODELO.getText());
-       this.veiculo.setPlaca(jTFPLACA.getText());
-       this.veiculo.setAno(jTFANO.getText());
-        
-       this.endereco.setLogradouro(jTFLogradouro.getText());
-       this.endereco.setComplemento(jTFComplemento.getText());
-       this.endereco.setNumero(jTFNumero.getText());
-       this.endereco.setCidade(jTFCidade.getText());
-       this.endereco.setUf(jCbUF.getName());
-       this.endereco.setCep(jTFormaCep.getText());
-       this.endereco.setBairro(jTFBairro.getText());
 
-        this.telefone.setDdd(jFormaDD.getText());
-        this.telefone.setTelefone(jFormaNumero.getText());
-        
-        this.telefone.setDdd(jFormaDD.getText());
-        this.telefone.setTelefone(jFormaNumero.getText());
-        this.cliente.setEndereco(endereco);
-        this.cliente.setVeiculo(veiculo);
-        
-        
-        
-        
         try {
-              System.out.println(cliente.getId());      
-           
-              clienteDao.persist(cliente);
             
+          
+            SwingUtilities.invokeLater(new Runnable() {
+           String cpf = ValidacaoView.limparCaracteres(jTFCPF.getText());
+          
+                @Override
+                public void run() {
+                   boolean v = ValidacaoView.isCPF(cpf);
+                    System.out.println("aqui");
+                    System.out.println(jTFCPF.getText());
+                       System.out.println(jTFNome.getText());
+                        if (jTFNome.getText().equals(""))
+                        {
+                            
+                              jTFNome.setBackground(Color.red);
+                              jTFNome.requestFocus();
+                              jTFNome.setText("");    
+                              
+                        JOptionPane.showMessageDialog(null, "Preencha o campo nome");
+                        
+                        }
+                        
+                        else if(jTFRG.getText().isEmpty()){
+                        
+                              jTFRG.setBackground(Color.red);
+                              jTFRG.requestFocus();
+                              jTFRG.setText("");                       
+                        JOptionPane.showMessageDialog(null, "Preencha o campo RG");
+                        }
+                        
+                       else if (v==false){ 
+                        jTFCPF.setBackground(Color.red);
+                        
+                        jTFCPF.requestFocus();
+                        jTFCPF.setText("");
+                          JOptionPane.showMessageDialog(null, "Campo CPF vazio ou invalido");
+                        }else {
+
+                        cliente.setNome(jTFNome.getText());
+                        cliente.setCpf(jTFCPF.getText());
+                        cliente.setRg(jTFRG.getText());
+
+                        veiculo.setMarca(jTfMARCA.getText());
+                        veiculo.setModelo(jTFMODELO.getText());
+                        veiculo.setPlaca(jTFPLACA.getText());
+                        veiculo.setAno(jTFANO.getText());
+
+                        endereco.setLogradouro(jTFLogradouro.getText());
+                        endereco.setComplemento(jTFComplemento.getText());
+                        endereco.setNumero(jTFNumero.getText());
+                        endereco.setCidade(jTFCidade.getText());
+                        endereco.setUf(jCbUF.getName());
+                        endereco.setCep(jTFormaCep.getText());
+                        endereco.setBairro(jTFBairro.getText());
+                        telefone.setDdd(jFormaDD.getText());
+                        telefone.setTelefone(jFormaNumero.getText());
+
+                        telefone.setDdd(jFormaDD.getText());
+                        telefone.setTelefone(jFormaNumero.getText());
+                        cliente.setEndereco(endereco);
+                        cliente.setVeiculo(veiculo);
 
 
+
+                       
+                        // clienteDao.persist(cliente);
+                        ValidacaoView.dispayMsg(" Cliente " + jTFNome.getText() + "Cadastrado com sucesso");
+
+                    }
+                }
+            });
         } catch (Exception ex) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Cliente cadastrado com Sucesso");
+
         jTFLogradouro.setText("");
         jTFComplemento.setText("");
         jTFNumero.setText("");
@@ -461,59 +500,56 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void jBTFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTFecharActionPerformed
         dispose();
     }//GEN-LAST:event_jBTFecharActionPerformed
-  public static void main(String[] args) {
+    public static void main(String[] args) {
         new CadastrarCliente().setVisible(true);
     }
 
-  
-  
-   
     public void preencheTelaCadastro(Cliente cli) {
-        System.out.println(cli.getId());   
+        System.out.println(cli.getId());
         cli.setId(cli.getId());
-        System.out.println(cli.getId()); 
-            jTFNome.setText(cli.getNome());
-            jTFRG.setText(cli.getRg());
-            jTFCPF.setText(cli.getCpf());
-            
-            jTFLogradouro.setText(cli.getEndereco().getLogradouro());
-            jTFComplemento.setText(cli.getEndereco().getComplemento());
-            jTFNumero.setText(cli.getEndereco().getNumero());
-            jTFBairro.setText(cli.getEndereco().getBairro());
-            jTFCidade.setText(cli.getEndereco().getCidade());
-            jCbUF.setName(cli.getEndereco().getUf());
-            jTFormaCep.setText(cli.getEndereco().getCep());
-            
-                tel = cli.getTelefone();
-                //System.out.println(tel);
-                for (Telefone telefone1 : tel) {
-                this.telefone = telefone1;
+        System.out.println(cli.getId());
+        jTFNome.setText(cli.getNome());
+        jTFRG.setText(cli.getRg());
+        jTFCPF.setText(cli.getCpf());
+
+        jTFLogradouro.setText(cli.getEndereco().getLogradouro());
+        jTFComplemento.setText(cli.getEndereco().getComplemento());
+        jTFNumero.setText(cli.getEndereco().getNumero());
+        jTFBairro.setText(cli.getEndereco().getBairro());
+        jTFCidade.setText(cli.getEndereco().getCidade());
+        jCbUF.setName(cli.getEndereco().getUf());
+        jTFormaCep.setText(cli.getEndereco().getCep());
+
+        tel = cli.getTelefone();
+        //System.out.println(tel);
+        for (Telefone telefone1 : tel) {
+            this.telefone = telefone1;
         }
-                  vei = cli.getVeiculo();
-                //System.out.println(tel);
-                for (Veiculo veiculos : vei) {
-                this.veiculo = veiculos;
+        veiculos = cli.getVeiculo();
+        //System.out.println(tel);
+        for (Veiculo veiculos : this.veiculos) {
+            this.veiculo = veiculos;
         }
-              
-                
-                
-            System.out.println("aqui");
-            jFormaDD.setText(telefone.getDdd());
-            jFormaNumero.setText(telefone.getTelefone());
-           
-            
-                                     
-              jTFANO.setText(veiculo.getAno());
-              jTFMODELO.setText(veiculo.getModelo());
-              jTFPLACA.setText(veiculo.getPlaca());
-              jTfMARCA.setText(veiculo.getMarca());
-              jTFComplemento.setText(cli.getEndereco().getComplemento());
-              
-               
-           
-               
-            
-       
+
+
+
+        System.out.println("aqui");
+        jFormaDD.setText(telefone.getDdd());
+        jFormaNumero.setText(telefone.getTelefone());
+
+
+
+        jTFANO.setText(veiculo.getAno());
+        jTFMODELO.setText(veiculo.getModelo());
+        jTFPLACA.setText(veiculo.getPlaca());
+        jTfMARCA.setText(veiculo.getMarca());
+        jTFComplemento.setText(cli.getEndereco().getComplemento());
+
+
+
+
+
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTCadastrar;
