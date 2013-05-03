@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/Adilsoon/Documents/grupo4_ne3a_2012_2/GerenciadorOS/src/br/com/ordemDeServico/view/ConsultarCliente.java</file>
+        <file>file:/C:/Users/Adilsoon/Documents/grupo4_ne3a_2012_2/GerenciadorOS/src/br/com/ordemDeServico/model/entity/Cliente.java</file>
+        <file>file:/C:/Users/Adilsoon/Documents/grupo4_ne3a_2012_2/GerenciadorOS/src/br/com/ordemDeServico/view/CadastrarCliente.java</file>
+        <file>file:/C:/Users/Adilsoon/Documents/grupo4_ne3a_2012_2/GerenciadorOS/src/br/com/ordemDeServico/model/dao/ClienteDao.java</file>
+        <file>file:/C:/Users/Adilsoon/Documents/grupo4_ne3a_2012_2/GerenciadorOS/src/Util/ValidacaoView.java</file>
+        <file>file:/C:/Users/Adilsoon/Documents/grupo4_ne3a_2012_2/GerenciadorOS/src/br/com/ordemDeServico/model/dao/HibernateUtil.java</file>
+    </open-files>
 </project-private>
