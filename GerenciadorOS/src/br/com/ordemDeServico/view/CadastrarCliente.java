@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -41,8 +40,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
     public void setCliente(Cliente cli) {
         this.preencheTelaCadastro(cli);
         this.cliente = cli;
-
-
     }
 
     @SuppressWarnings("unchecked")
@@ -50,12 +47,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        labelNome = new javax.swing.JLabel();
         jTFNome = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        labelRg = new javax.swing.JLabel();
         jTFCPF = new javax.swing.JFormattedTextField();
         jTFRG = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        labelCpf = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -102,18 +99,20 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jBTCadastrar = new javax.swing.JButton();
         jBTFechar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("NOME:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 37, -1, -1));
+        labelNome.setText("NOME: *");
+        jPanel2.add(labelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 37, -1, -1));
         jPanel2.add(jTFNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 34, 547, -1));
 
-        jLabel3.setText("RG:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, -1, -1));
+        labelRg.setText("RG: *");
+        jPanel2.add(labelRg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, -1, -1));
 
         try {
             jTFCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -125,12 +124,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 jTFCPFActionPerformed(evt);
             }
         });
-        jPanel2.add(jTFCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 82, 241, -1));
+        jPanel2.add(jTFCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 82, 240, -1));
         jPanel2.add(jTFRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 82, 206, -1));
 
-        jLabel4.setText("CPF");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 85, -1, -1));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 590, 9));
+        labelCpf.setText("CPF *");
+        jPanel2.add(labelCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 85, -1, -1));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 650, 9));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -365,7 +364,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jPanel2.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, 859, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 859, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -384,7 +383,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 jBTCadastrarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBTCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, -1, -1));
+        getContentPane().add(jBTCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, -1, -1));
 
         jBTFechar.setText("FECHAR");
         jBTFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -394,96 +393,108 @@ public class CadastrarCliente extends javax.swing.JFrame {
         });
         getContentPane().add(jBTFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 520, -1, -1));
 
+        jButton1.setText("ORDEM DE SERVIÇO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 520, -1, -1));
+
+        jButton2.setText("LIMPAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 520, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void jBTCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTCadastrarActionPerformed
-
         try {
+
+            System.out.println("aqui");
+            System.out.println(jTFCPF.getText());
+            System.out.println(jTFNome.getText());
+            if (jTFNome.getText().length() > 0) {
+                labelNome.setVisible(false);
+                jTFNome.setBackground(Color.WHITE);
+
+
+            } else {
+                labelNome.setVisible(true);
+                jTFNome.setBackground(Color.red);
+                jTFNome.requestFocus();
+            }
+
+
+            if (jTFRG.getText().length() > 0) {
+                labelRg.setVisible(false);
+                jTFRG.setBackground(Color.WHITE);
+            } else {
+                labelRg.setVisible(true);
+                jTFRG.setBackground(Color.red);
+                jTFRG.requestFocus();
+            }
             
-          
-            SwingUtilities.invokeLater(new Runnable() {
-           String cpf = ValidacaoView.limparCaracteres(jTFCPF.getText());
-          
-                @Override
-                public void run() {
-                   boolean v = ValidacaoView.isCPF(cpf);
-                    System.out.println("aqui");
-                    System.out.println(jTFCPF.getText());
-                       System.out.println(jTFNome.getText());
-                        if (jTFNome.getText().equals(""))
-                        {
-                            
-                              jTFNome.setBackground(Color.red);
-                              jTFNome.requestFocus();
-                              jTFNome.setText("");    
-                              
-                        JOptionPane.showMessageDialog(null, "Preencha o campo nome");
-                        
-                        }
-                        
-                        else if(jTFRG.getText().isEmpty()){
-                        
-                              jTFRG.setBackground(Color.red);
-                              jTFRG.requestFocus();
-                              jTFRG.setText("");                       
-                        JOptionPane.showMessageDialog(null, "Preencha o campo RG");
-                        }
-                        
-                       else if (v==false){ 
-                        jTFCPF.setBackground(Color.red);
-                        
-                        jTFCPF.requestFocus();
-                        jTFCPF.setText("");
-                          JOptionPane.showMessageDialog(null, "Campo CPF vazio ou invalido");
-                        }else {
+            String cpf = ValidacaoView.limparCaracteres(jTFCPF.getText());
+            boolean v = ValidacaoView.isCPF(cpf);
+              System.out.println(cpf);
+            if (v == true) {
+                System.out.println(cpf);
+                labelCpf.setVisible(false);
+                jTFCPF.setBackground(Color.WHITE);
+            } else {
+                labelCpf.setVisible(true);
+                jTFCPF.setBackground(Color.red);
+                jTFCPF.requestFocus();
+                jTFCPF.setText("");
+                JOptionPane.showMessageDialog(null, "CPF invalido ou campo vazio!!");
+            }
+           
+            if ((jTFNome.getText().length() > 0)
+                    && (jTFRG.getText().length() > 0)
+                    && (jTFCPF.getText().length() > 0)) {
+               
+                cliente.setNome(jTFNome.getText());
+                cliente.setCpf(jTFCPF.getText());
+                cliente.setRg(jTFRG.getText());
 
-                        cliente.setNome(jTFNome.getText());
-                        cliente.setCpf(jTFCPF.getText());
-                        cliente.setRg(jTFRG.getText());
+                veiculo.setMarca(jTfMARCA.getText());
+                veiculo.setModelo(jTFMODELO.getText());
+                veiculo.setPlaca(jTFPLACA.getText());
+                veiculo.setAno(jTFANO.getText());
 
-                        veiculo.setMarca(jTfMARCA.getText());
-                        veiculo.setModelo(jTFMODELO.getText());
-                        veiculo.setPlaca(jTFPLACA.getText());
-                        veiculo.setAno(jTFANO.getText());
+                endereco.setLogradouro(jTFLogradouro.getText());
+                endereco.setComplemento(jTFComplemento.getText());
+                endereco.setNumero(jTFNumero.getText());
+                endereco.setCidade(jTFCidade.getText());
+                endereco.setUf(jCbUF.getName());
+                endereco.setCep(jTFormaCep.getText());
+                endereco.setBairro(jTFBairro.getText());
+                telefone.setDdd(jFormaDD.getText());
+                telefone.setTelefone(jFormaNumero.getText());
 
-                        endereco.setLogradouro(jTFLogradouro.getText());
-                        endereco.setComplemento(jTFComplemento.getText());
-                        endereco.setNumero(jTFNumero.getText());
-                        endereco.setCidade(jTFCidade.getText());
-                        endereco.setUf(jCbUF.getName());
-                        endereco.setCep(jTFormaCep.getText());
-                        endereco.setBairro(jTFBairro.getText());
-                        telefone.setDdd(jFormaDD.getText());
-                        telefone.setTelefone(jFormaNumero.getText());
-
-                        telefone.setDdd(jFormaDD.getText());
-                        telefone.setTelefone(jFormaNumero.getText());
-                        cliente.setEndereco(endereco);
-                        cliente.setVeiculo(veiculo);
+                telefone.setDdd(jFormaDD.getText());
+                telefone.setTelefone(jFormaNumero.getText());
+                cliente.setEndereco(endereco);
+                cliente.setVeiculo(veiculo);
+                cliente.setTelefone(telefone);
 
 
+                 clienteDao.persist(cliente); 
+               JOptionPane.showMessageDialog(null, "Dados Validados");
+            } else {
+                JOptionPane.showMessageDialog(null, "Confira os campos Obrigatórios!!");
 
-                       
-                        // clienteDao.persist(cliente);
-                        ValidacaoView.dispayMsg(" Cliente " + jTFNome.getText() + "Cadastrado com sucesso");
+            }
 
-                    }
-                }
-            });
+
         } catch (Exception ex) {
             Logger.getLogger(CadastrarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        jTFLogradouro.setText("");
-        jTFComplemento.setText("");
-        jTFNumero.setText("");
-        jTFCidade.setText("");
-        jCbUF.setName("");
-        jTFormaCep.setText("");
-        jTFNome.setText("");
-        jTFCPF.setText("");
-        jTFRG.setText("");
-        jTFBairro.setText("");
 
 
 
@@ -498,8 +509,40 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormaNumeroActionPerformed
 
     private void jBTFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTFecharActionPerformed
+        
+        
         dispose();
     }//GEN-LAST:event_jBTFecharActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTFLogradouro.setText("");
+        jTFComplemento.setText("");
+        jTFNumero.setText("");
+        jTFCidade.setText("");
+        jCbUF.setName("");
+        jTFormaCep.setText("");
+        jTFNome.setText("");
+        jTFCPF.setText("");
+        jTFRG.setText("");
+        jTFBairro.setText("");
+        jTfMARCA.setText("");
+        jTFMODELO.setText("");
+        jTFPLACA.setText("");
+        jTFANO.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         
+                if(cliente.getNome()== null){
+                JOptionPane.showMessageDialog(null, "Cliente nao cadastrado");
+                }else{
+                CadastroOrdemDeServico cadOrdem= new CadastroOrdemDeServico();
+                cadOrdem.setVisible(true);
+                cadOrdem.setCliente(this.cliente);
+                }
+                
+                
+                System.out.println("Aqui" + this.cliente.getNome());
+    }//GEN-LAST:event_jButton1ActionPerformed
     public static void main(String[] args) {
         new CadastrarCliente().setVisible(true);
     }
@@ -519,7 +562,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
         jTFCidade.setText(cli.getEndereco().getCidade());
         jCbUF.setName(cli.getEndereco().getUf());
         jTFormaCep.setText(cli.getEndereco().getCep());
-
         tel = cli.getTelefone();
         //System.out.println(tel);
         for (Telefone telefone1 : tel) {
@@ -530,30 +572,20 @@ public class CadastrarCliente extends javax.swing.JFrame {
         for (Veiculo veiculos : this.veiculos) {
             this.veiculo = veiculos;
         }
-
-
-
         System.out.println("aqui");
         jFormaDD.setText(telefone.getDdd());
         jFormaNumero.setText(telefone.getTelefone());
-
-
-
         jTFANO.setText(veiculo.getAno());
         jTFMODELO.setText(veiculo.getModelo());
         jTFPLACA.setText(veiculo.getPlaca());
         jTfMARCA.setText(veiculo.getMarca());
         jTFComplemento.setText(cli.getEndereco().getComplemento());
-
-
-
-
-
-
-    }
+  }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTCadastrar;
     private javax.swing.JButton jBTFechar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jCbUF;
     private javax.swing.JFormattedTextField jFormaComercial;
     private javax.swing.JFormattedTextField jFormaDD;
@@ -571,14 +603,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -605,5 +634,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTFormaNumero;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTfMARCA;
+    private javax.swing.JLabel labelCpf;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelRg;
     // End of variables declaration//GEN-END:variables
 }
