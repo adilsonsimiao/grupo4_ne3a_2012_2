@@ -29,29 +29,42 @@ public class Cliente implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-   @Column(name ="ID", nullable = false)
+   @Column(name ="id", nullable = false)
     private int id;
  
-    @Column(name ="Nome", nullable = false)
+    @Column(name ="nome", nullable = false)
     private String nome;
  
- @Column(name ="CPF",nullable = false)  
+ @Column(name ="cpf",nullable = false)  
     private String cpf;
 
- @Column(name ="RG",nullable = false)
+ @Column(name ="rg",nullable = false)
     private String rg;
-   
- @OneToOne(cascade = CascadeType.ALL)
+  
+     @OneToMany(cascade = CascadeType.ALL)
+      @JoinColumn(name= "clienteID")
+     private List<OrdemDeServico>ordem;
+
+    public List<OrdemDeServico> getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(OrdemDeServico ordem) {
+        this.ordem.add(ordem);
+    }
+     
+   @OneToOne(cascade = CascadeType.ALL)      
     Endereco endereco;
  
     @OneToMany(cascade = CascadeType.ALL)
-  private List<Telefone> telefone;
+    @JoinColumn(name= "clienteID")
+    private List<Telefone> telefone;
   
   
     
     
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name= "IDCliente")
+    @JoinColumn(name= "clienteID")
      private List<Veiculo> veiculo;
     
    
@@ -69,7 +82,7 @@ public class Cliente implements Serializable {
     }
 
     public void setTelefone(Telefone telefone) {
-        System.out.println(telefone);
+       
         this.telefone.add(telefone);
         
     }

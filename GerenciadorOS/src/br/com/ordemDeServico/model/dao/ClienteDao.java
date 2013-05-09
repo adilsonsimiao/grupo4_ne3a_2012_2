@@ -35,11 +35,6 @@ Cliente cliente = new Cliente();
        super(s);
         
     }
-
-   
-
-
-
 public List consultarNome(String nome){
         return this.session.createQuery("from Cliente  cliente where cliente.nome like '%"+nome+"%'").list();
                                              
@@ -73,7 +68,7 @@ public List buscaCl(String nome) {
         List <Cliente> busca = null;
         busca = this.sessao.createCriteria(classeGenerica).list();
         sessao.getTransaction().commit();        
-        sessao.close();
+        //sessao.close();
         
         return busca;
     }
@@ -87,7 +82,7 @@ public List buscaCl(String nome) {
 
         sessao.getTransaction().commit();
         busca = sessao.createCriteria(Cliente.class).add( Restrictions.like("nome", "%"+nome+"%")).list();
-        //sessao.close();
+       
         
         return busca;
     }
@@ -100,9 +95,14 @@ public List buscaCl(String nome) {
         List <Cliente> busca = null;
         sessao.getTransaction().commit();
         busca = sessao.createCriteria(Cliente.class).add( Restrictions.like("nome", "%"+cpf+"%")).list();
-        sessao.close();
+        
         
         return busca;
     }
+     
+     public void close(){
+     this.sessao.close();
+     
+     }
     
 }
