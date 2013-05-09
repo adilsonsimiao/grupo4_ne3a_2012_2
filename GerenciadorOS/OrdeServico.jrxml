@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdeServico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="472a8d19-379f-456c-9701-e22bc6125f6c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     cliente.`id` AS cliente_id,
+     cliente.`cpf` AS cliente_cpf,
+     cliente.`nome` AS cliente_nome,
+     cliente.`rg` AS cliente_rg,
+     ordemdeservico.`id` AS ordemdeservico_id,
+     ordemdeservico.`dataEntrada` AS ordemdeservico_dataEntrada,
+     ordemdeservico.`dataSaida` AS ordemdeservico_dataSaida,
+     ordemdeservico.`Descricao` AS ordemdeservico_Descricao,
+     ordemdeservico.`Peca` AS ordemdeservico_Peca,
+     ordemdeservico.`valorTotal` AS ordemdeservico_valorTotal
+FROM
+     `cliente` cliente INNER JOIN `ordemdeservico` ordemdeservico ON cliente.`id` = ordemdeservico.`IDCliente`]]>
+	</queryString>
+	<field name="cliente_id" class="java.lang.Integer"/>
+	<field name="cliente_cpf" class="java.lang.String"/>
+	<field name="cliente_nome" class="java.lang.String"/>
+	<field name="cliente_rg" class="java.lang.String"/>
+	<field name="ordemdeservico_id" class="java.lang.Integer"/>
+	<field name="ordemdeservico_dataEntrada" class="java.sql.Date"/>
+	<field name="ordemdeservico_dataSaida" class="java.sql.Date"/>
+	<field name="ordemdeservico_Descricao" class="java.lang.String"/>
+	<field name="ordemdeservico_Peca" class="java.lang.String"/>
+	<field name="ordemdeservico_valorTotal" class="java.lang.Double"/>
+	<group name="cliente_id">
+		<groupExpression><![CDATA[$F{cliente_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d9bf0528-4781-4c30-b48d-eef75589e959" mode="Opaque" x="217" y="15" width="358" height="38" forecolor="#000000"/>
+				<textElement>
+					<font fontName="Serif" size="26" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Relatorio de Ordem de Servico]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="ec508f3b-d5aa-4dee-9d48-f9864e8dc952" x="13" y="15" width="70" height="64"/>
+				<imageExpression><![CDATA["C:\\Users\\Adilsoon\\Documents\\grupo4_ne3a_2012_2\\GerenciadorOS\\img\\logoclientes.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="df3726ed-d395-43c8-a7d3-1c62382fd178" x="326" y="40" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
